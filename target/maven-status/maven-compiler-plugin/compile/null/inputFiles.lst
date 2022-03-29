@@ -1,2 +1,4 @@
-/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/GreetingResource.java
-/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/MyRemoteService.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/interfaceadapter/gateway/PokemonListGateway.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonNameUrlList.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonList.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/interfaceadapter/command/PokemonCommand.java
