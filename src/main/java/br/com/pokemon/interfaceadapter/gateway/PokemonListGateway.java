@@ -22,5 +22,5 @@ public interface PokemonListGateway {
     @GET
     @Path("pokemon/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    PokemonDetailResponse listPokemonById(@PathParam("id") Long id);
+    PokemonDetailResponse listPokemonById(@PathParam("id") int id);
 }

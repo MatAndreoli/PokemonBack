@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PokemonDetailResponse {
+
     public List<PokemonAbilities> abilities = new ArrayList<>();
     public Long id;
+    public String name;
     public PokemonSprites sprites;
-    public List<PokemonTypes> types;
+
+    public List<PokemonTypes> types= new ArrayList<>();
 
     public List<PokemonAbilities> getAbilities() {
         return abilities;
@@ -15,6 +18,10 @@ public class PokemonDetailResponse {
 
     public Long getId() {
         return id;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public PokemonSprites getSprites() {
