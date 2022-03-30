@@ -1,5 +1,6 @@
 br/com/pokemon/domain/PokemonTypes.class
 br/com/pokemon/domain/PokemonNameUrl.class
+br/com/pokemon/interfaceadapter/resource/PokemonResource.class
 br/com/pokemon/domain/PokemonSprites.class
 br/com/pokemon/domain/PokemonNameUrlResponse.class
 br/com/pokemon/domain/PokemonAbilities.class

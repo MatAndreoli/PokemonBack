@@ -1,12 +1,13 @@
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/interfaceadapter/resource/PokemonResource.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonDetailResponse.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonNameUrl.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonSprites.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/interfaceadapter/model/PokemonDetailSimpleResponse.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/interfaceadapter/gateway/PokemonListGateway.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonNameUrlResponse.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonAbilities.java
-/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonDetailResponse.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonType.java
-/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonNameUrl.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonAbility.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/interfaceadapter/command/PokemonCommand.java
-/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonSprites.java
-/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/interfaceadapter/model/PokemonDetailSimpleResponse.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/interfaceadapter/model/PokemonDetailMapper.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonTypes.java

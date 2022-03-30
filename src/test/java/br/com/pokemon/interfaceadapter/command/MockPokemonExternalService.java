@@ -1,3 +1,4 @@
+/*
 package br.com.pokemon.interfaceadapter.command;
 
 import br.com.pokemon.domain.PokemonDetailResponse;
@@ -49,3 +50,4 @@ public class MockPokemonExternalService extends PokemonCommand{
         return pokemonDetailResponse;
     }
 }
+*/
