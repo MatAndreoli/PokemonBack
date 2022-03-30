@@ -15,15 +15,15 @@ import java.util.List;
 @ApplicationScoped
 public class MockPokemonExternalService extends PokemonCommand{
 
-    @Override
-    public PokemonNameUrlResponse pokemonList() {
-        PokemonNameUrl pokemonNameUrl = new PokemonNameUrl();
-        PokemonNameUrlResponse pokemonNameUrlResponse = new PokemonNameUrlResponse();
-        pokemonNameUrlResponse.results.add(pokemonNameUrl);
-        pokemonNameUrlResponse.results.add(pokemonNameUrl);
-        pokemonNameUrlResponse.results.add(pokemonNameUrl);
-        return pokemonNameUrlResponse;
-    }
+//    @Override
+//    public PokemonNameUrlResponse pokemonList() {
+//        PokemonNameUrl pokemonNameUrl = new PokemonNameUrl();
+//        PokemonNameUrlResponse pokemonNameUrlResponse = new PokemonNameUrlResponse();
+//        pokemonNameUrlResponse.results.add(pokemonNameUrl);
+//        pokemonNameUrlResponse.results.add(pokemonNameUrl);
+//        pokemonNameUrlResponse.results.add(pokemonNameUrl);
+//        return pokemonNameUrlResponse;
+//    }
 
 //    @Override
 //    public PokemonDetailResponse pokemonById(@PathParam("id") int id) {

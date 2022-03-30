@@ -12,6 +12,17 @@ public class PokemonDetailResponse {
 
     public List<PokemonTypes> types= new ArrayList<>();
 
+    @Override
+    public String toString() {
+        return "PokemonDetailResponse{" +
+                "abilities=" + abilities +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", sprites=" + sprites +
+                ", types=" + types +
+                '}';
+    }
+
     public List<PokemonAbilities> getAbilities() {
         return abilities;
     }

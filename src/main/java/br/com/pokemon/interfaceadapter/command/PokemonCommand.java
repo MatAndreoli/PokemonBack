@@ -1,6 +1,5 @@
 package br.com.pokemon.interfaceadapter.command;
 
-import br.com.pokemon.domain.PokemonDetailResponse;
 import br.com.pokemon.domain.PokemonNameUrlResponse;
 import br.com.pokemon.interfaceadapter.gateway.PokemonListGateway;
 import br.com.pokemon.interfaceadapter.model.PokemonDetailMapper;
@@ -22,8 +21,6 @@ public class PokemonCommand {
     @Inject
     @RestClient
     PokemonListGateway pokemonListGateway;
-
-    PokemonDetailMapper pokemonDetailMapper;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

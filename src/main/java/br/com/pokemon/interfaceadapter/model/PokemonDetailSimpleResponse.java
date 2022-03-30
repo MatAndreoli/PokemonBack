@@ -10,6 +10,9 @@ public class PokemonDetailSimpleResponse {
     public List<String> abilities = new ArrayList<>();
     public List<String> types = new ArrayList<>();
 
+    public PokemonDetailSimpleResponse() {
+    }
+
     public PokemonDetailSimpleResponse(Long id, String name, String front_default, List<String> abilities, List<String> types) {
         this.id = id;
         this.name = name;

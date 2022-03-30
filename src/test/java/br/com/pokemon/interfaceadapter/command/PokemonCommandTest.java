@@ -1,44 +1,49 @@
 package br.com.pokemon.interfaceadapter.command;
 
-import br.com.pokemon.domain.PokemonNameUrl;
-import br.com.pokemon.domain.PokemonNameUrlResponse;
-import io.quarkus.test.Mock;
-import io.quarkus.test.common.http.TestHTTPEndpoint;
+import br.com.pokemon.domain.*;
+import br.com.pokemon.interfaceadapter.model.PokemonDetailMapper;
+import br.com.pokemon.interfaceadapter.model.PokemonDetailSimpleResponse;
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.mockito.InjectMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
-
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
-import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.hamcrest.Matchers.*;
 
 @QuarkusTest
-@TestHTTPEndpoint(PokemonCommand.class)
 class PokemonCommandTest {
-    PokemonNameUrl pokemonNameUrl = new PokemonNameUrl();
-    PokemonNameUrlResponse pokemonNameUrlResponse = new PokemonNameUrlResponse();
+
+    @Mock
+    PokemonDetailMapper pokemonDetailMapper;
 
     @BeforeEach
     public void before() {
-        pokemonNameUrlResponse.results.add(pokemonNameUrl);
-        pokemonNameUrlResponse.results.add(pokemonNameUrl);
-        pokemonNameUrlResponse.results.add(pokemonNameUrl);
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
     void pokemonList() {
-        given()
-                .get()
-                .then().statusCode(200);
-        String body =  "{\"results\":[{},{},{}]}";
-        given().get().then().body(is(body));
+        PokemonDetailResponse pokemonDetailResponse = new PokemonDetailResponse();
+        PokemonAbilities pokemonAbilities = new PokemonAbilities();
+        pokemonAbilities.ability = new PokemonAbility();
+        PokemonTypes pokemonTypes = new PokemonTypes();
+        pokemonTypes.type = new PokemonType();
+        pokemonAbilities.ability.name = "fjdkafj";
+        pokemonTypes.type.name = "fire";
+        pokemonDetailResponse.id = 1L;
+        pokemonDetailResponse.name = "bulbasaur";
+        pokemonDetailResponse.sprites = new PokemonSprites();
+        pokemonDetailResponse.sprites.front_default = "http://localhost:8080";
+        pokemonDetailResponse.abilities.add(pokemonAbilities);
+        pokemonDetailResponse.types.add(pokemonTypes);
+
+        System.out.println(pokemonDetailResponse);
+        Mockito.when(PokemonDetailMapper.mapperFromDetailResponseToDetailSimpleResponse(pokemonDetailResponse))
+                .thenReturn(new PokemonDetailSimpleResponse());
+
     }
 
     @Test
