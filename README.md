@@ -6,4 +6,5 @@ Na pasta raiz: `mvn quarkus:dev`
 
 ## URLs: 
 `http://localhost:8080/pokemons/`
+
 `http://localhost:8080/q/swagger-ui`
