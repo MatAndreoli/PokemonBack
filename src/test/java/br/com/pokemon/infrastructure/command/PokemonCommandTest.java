@@ -1,6 +1,7 @@
-package br.com.pokemon.interfaceadapter.command;
+package br.com.pokemon.infrastructure.command;
 
-import br.com.pokemon.interfaceadapter.model.PokemonDetailSimpleResponse;
+import br.com.pokemon.command.PokemonCommand;
+import br.com.pokemon.resource.entities.PokemonDetailSimpleResponse;
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -36,7 +36,7 @@ class PokemonCommandTest {
         Mockito.when(pokemonCommand.execute())
                 .thenReturn(pokemonDetailSimpleResponses);
         List<PokemonDetailSimpleResponse> test = pokemonCommand.execute();
-        assertEquals(test, pokemonCommand.execute());
+        assertEquals(test, pokemonDetailSimpleResponses);
     }
 
     private void init() {

@@ -1,6 +1,6 @@
-package br.com.pokemon.domain;
+package br.com.pokemon.infrastructure.domain;
 
-public class PokemonNameUrl {
+public class PokemonResult {
     public String name;
     public String url;
 

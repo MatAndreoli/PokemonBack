@@ -1,4 +1,4 @@
-package br.com.pokemon.domain;
+package br.com.pokemon.infrastructure.domain;
 
 public class PokemonTypes {
     public PokemonType type;

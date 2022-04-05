@@ -1,16 +1,15 @@
-package br.com.pokemon.domain;
+package br.com.pokemon.infrastructure.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PokemonDetailResponse {
+public class PokemonDetails {
 
     public List<PokemonAbilities> abilities = new ArrayList<>();
     public Long id;
     public String name;
     public PokemonSprites sprites;
-
-    public List<PokemonTypes> types= new ArrayList<>();
+    public List<PokemonTypes> types = new ArrayList<>();
 
     @Override
     public String toString() {

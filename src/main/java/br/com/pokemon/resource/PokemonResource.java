@@ -1,7 +1,7 @@
-package br.com.pokemon.interfaceadapter.resource;
+package br.com.pokemon.resource;
 
-import br.com.pokemon.interfaceadapter.command.PokemonCommand;
-import br.com.pokemon.interfaceadapter.model.PokemonDetailSimpleResponse;
+import br.com.pokemon.command.PokemonCommand;
+import br.com.pokemon.resource.entities.PokemonDetailSimpleResponse;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

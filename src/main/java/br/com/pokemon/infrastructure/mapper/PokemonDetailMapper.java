@@ -1,13 +1,14 @@
-package br.com.pokemon.interfaceadapter.model;
+package br.com.pokemon.infrastructure.mapper;
 
-import br.com.pokemon.domain.PokemonDetailResponse;
+import br.com.pokemon.infrastructure.domain.PokemonDetails;
+import br.com.pokemon.resource.entities.PokemonDetailSimpleResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PokemonDetailMapper {
 
-    public static PokemonDetailSimpleResponse mapperFromDetailResponseToDetailSimpleResponse(PokemonDetailResponse pokemonDetailResponse) {
+    public static PokemonDetailSimpleResponse mapperFromDetailResponseToDetailSimpleResponse(PokemonDetails pokemonDetailResponse) {
         List<String> typesStr = new ArrayList<>();
         List<String> abilitiesStr = new ArrayList<>();
 

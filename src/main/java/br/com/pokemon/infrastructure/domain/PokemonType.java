@@ -1,10 +1,9 @@
-package br.com.pokemon.domain;
+package br.com.pokemon.infrastructure.domain;
 
-public class PokemonAbility {
+public class PokemonType {
     public String name;
 
     public String getName() {
         return name;
     }
-
 }

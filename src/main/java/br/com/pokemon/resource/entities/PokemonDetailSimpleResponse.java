@@ -1,4 +1,4 @@
-package br.com.pokemon.interfaceadapter.model;
+package br.com.pokemon.resource.entities;
 
 import java.util.ArrayList;
 import java.util.List;
