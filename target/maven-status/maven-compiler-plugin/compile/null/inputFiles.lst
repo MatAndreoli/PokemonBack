@@ -10,6 +10,6 @@
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/domain/PokemonAbilities.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/command/mapper/PokemonDetailMapper.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/command/PokemonCommand.java
-/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/domain/PokemonDetails.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/domain/PokemonResultDetails.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/domain/PokemonResult.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/resource/mapper/PokemonDetailSimpleResponseMapper.java
