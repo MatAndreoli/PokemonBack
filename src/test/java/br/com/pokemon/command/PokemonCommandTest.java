@@ -4,12 +4,14 @@ import br.com.pokemon.command.mapper.PokemonDetailMapper;
 import br.com.pokemon.domain.PokemonDetail;
 import br.com.pokemon.infrastructure.domain.*;
 import br.com.pokemon.infrastructure.gateway.PokemonGateway;
+import br.com.pokemon.templates.TemplatesPath;
 import br.com.pokemon.templates.pokemondetail.PokemonDetailTemplate;
 import br.com.pokemon.templates.pokemondetailresponse.PokemonDeatilsResponseTemplate;
 import br.com.pokemon.templates.pokemonresult.PokemonResultListTemplate;
 import br.com.pokemon.templates.pokemonresult.PokemonResultTemplate;
 import br.com.pokemon.templates.pokemondetails.PokemonResultDetailsTemplate;
 
+import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,10 +40,7 @@ class PokemonCommandTest {
 
     @BeforeEach
     void initData() {
-        PokemonResultTemplate.loadTemplates();
-        PokemonResultDetailsTemplate.loadTemplates();
-        PokemonDeatilsResponseTemplate.loadTemplates();
-        PokemonDetailTemplate.loadTemplates();
+        FixtureFactoryLoader.loadTemplates(TemplatesPath.TEMPLATES_PATH);
         pokemonCommand = new PokemonCommand(pokemonGatewayMock, pokemonDetailResponseMapper);
     }
 

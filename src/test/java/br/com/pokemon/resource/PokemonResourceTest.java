@@ -4,8 +4,10 @@ import br.com.pokemon.command.PokemonCommand;
 import br.com.pokemon.domain.PokemonDetail;
 import br.com.pokemon.resource.entities.PokemonDetailSimpleResponse;
 import br.com.pokemon.resource.mapper.PokemonDetailSimpleResponseMapper;
+import br.com.pokemon.templates.TemplatesPath;
 import br.com.pokemon.templates.pokemondetailresponse.PokemonDeatilsResponseTemplate;
 import br.com.pokemon.templates.pokemondetailsimpleresponse.PokemonDetailSimpleResponseTemplate;
+import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,8 +35,7 @@ class PokemonResourceTest {
 
     @BeforeEach
     void initData() {
-        PokemonDetailSimpleResponseTemplate.loadTemplates();
-        PokemonDeatilsResponseTemplate.loadTemplates();
+        FixtureFactoryLoader.loadTemplates(TemplatesPath.TEMPLATES_PATH);
         pokemonResource = new PokemonResource(pokemonCommandMock, pokemonDetailSimpleResponseMapper);
     }
 

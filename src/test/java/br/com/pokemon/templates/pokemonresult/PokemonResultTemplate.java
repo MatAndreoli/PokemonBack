@@ -17,8 +17,8 @@ public class PokemonResultTemplate implements TemplateLoader {
     @Override
     public void load() {
         Fixture.of(PokemonResult.class).addTemplate(VALID, new Rule() {{
-            add("name", "matheus");
-            add("url", "localhost:8080");
+            add("name", "charmander");
+            add("url", "localhost:8080/image");
         }});
     }
 
