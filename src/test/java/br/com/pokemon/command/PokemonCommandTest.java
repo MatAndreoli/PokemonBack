@@ -47,7 +47,7 @@ class PokemonCommandTest {
 
     @DisplayName("PokemonGateway.getPokemonList() should return a PokemonResultList object")
     @Test
-    void execute() {
+    void gatewayShouldReturnPokemonResultList() {
         pokemonResultList.setResults(PokemonResultListTemplate.gimmeAValid2().getResults());
 
         Mockito.when(pokemonGatewayMock.getPokemonList()).thenReturn(pokemonResultList);
