@@ -17,7 +17,7 @@ public class AbilityTemplate implements TemplateLoader {
     @Override
     public void load() {
         Fixture.of(PokemonAbility.class).addTemplate(VALID, new Rule() {{
-            add("name", "charmander");
+            add("name", "fire ball");
         }});
     }
 

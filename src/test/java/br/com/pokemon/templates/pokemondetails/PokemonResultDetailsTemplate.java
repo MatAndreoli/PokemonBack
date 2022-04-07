@@ -6,7 +6,7 @@ import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
 
-public class PokemonDetailsTemplate implements TemplateLoader {
+public class PokemonResultDetailsTemplate implements TemplateLoader {
 
     private static final String VALID = "valid";
 
@@ -16,16 +16,16 @@ public class PokemonDetailsTemplate implements TemplateLoader {
 
     @Override
     public void load() {
-        Fixture.of(PokemonDetails.class).addTemplate(VALID, new Rule(){{
-            add("id", 2L);
-            add("name", "bulbasaur");
+        Fixture.of(PokemonResultDetails.class).addTemplate(VALID, new Rule(){{
+            add("id", 1L);
+            add("name", "charmander");
             add("sprites", one(PokemonSprites.class, VALID));
             add("abilities", has(2).of(PokemonAbilities.class, VALID));
             add("types", has(2).of(PokemonTypes.class, VALID));
         }});
     }
 
-    public static PokemonDetails gimmeAValid() {
-        return Fixture.from(PokemonDetails.class).gimme(VALID);
+    public static PokemonResultDetails gimmeAValid() {
+        return Fixture.from(PokemonResultDetails.class).gimme(VALID);
     }
 }

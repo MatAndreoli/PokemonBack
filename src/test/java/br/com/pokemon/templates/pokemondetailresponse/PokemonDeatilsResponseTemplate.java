@@ -1,6 +1,6 @@
-package br.com.pokemon.templates.pokemondetailreponse;
+package br.com.pokemon.templates.pokemondetailresponse;
 
-import br.com.pokemon.domain.PokemonDetailResponse;
+import br.com.pokemon.domain.PokemonDetail;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
@@ -13,7 +13,7 @@ public class PokemonDeatilsResponseTemplate implements TemplateLoader {
     public static final String VALID = "valid";
 
     public static void loadTemplates() {
-        FixtureFactoryLoader.loadTemplates("br.com.pokemon.templates.pokemondetailreponse");
+        FixtureFactoryLoader.loadTemplates("br.com.pokemon.templates.pokemondetailresponse");
     }
 
     @Override
@@ -21,10 +21,10 @@ public class PokemonDeatilsResponseTemplate implements TemplateLoader {
         List<String> abilities = new ArrayList<>();
         List<String> types = new ArrayList<>();
         abilities.add("fire ball");
-        abilities.add("poison atack");
+        abilities.add("fire ball");
         types.add("fire");
-        types.add("water");
-        Fixture.of(PokemonDetailResponse.class).addTemplate(VALID, new Rule() {{
+        types.add("fire");
+        Fixture.of(PokemonDetail.class).addTemplate(VALID, new Rule() {{
             add("id", 1L);
             add("name", "charmander");
             add("front_default", "localhost:image/url");
@@ -33,7 +33,11 @@ public class PokemonDeatilsResponseTemplate implements TemplateLoader {
         }});
     }
 
-    public static PokemonDetailResponse gimmeAValid() {
-        return Fixture.from(PokemonDetailResponse.class).gimme(VALID);
+    public static List<PokemonDetail> gimmeAValidList() {
+        return Fixture.from(PokemonDetail.class).gimme(2, VALID);
+    }
+
+    public static PokemonDetail gimmeAValid() {
+        return Fixture.from(PokemonDetail.class).gimme(VALID);
     }
 }

@@ -17,7 +17,7 @@ public class SpritesTemplate implements TemplateLoader {
     @Override
     public void load() {
         Fixture.of(PokemonSprites.class).addTemplate(VALID, new Rule() {{
-            add("front_default", "http:some/image");
+            add("front_default", "localhost:image/url");
         }});
     }
 
