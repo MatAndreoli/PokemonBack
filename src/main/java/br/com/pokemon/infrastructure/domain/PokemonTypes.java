@@ -1,9 +1,13 @@
 package br.com.pokemon.infrastructure.domain;
 
 public class PokemonTypes {
-    public PokemonType type;
+    private PokemonType type;
 
     public PokemonType getType() {
         return type;
+    }
+
+    public void setType(PokemonType type) {
+        this.type = type;
     }
 }

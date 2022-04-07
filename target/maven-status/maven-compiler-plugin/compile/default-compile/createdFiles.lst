@@ -1,4 +1,7 @@
+br/com/pokemon/domain/PokemonDetailResponse.class
+br/com/pokemon/command/mapper/PokemonDetailResponseMapper.class
 br/com/pokemon/resource/entities/PokemonDetailSimpleResponse.class
+br/com/pokemon/resource/mapper/PokemonDetailSimpleResponseMapper.class
 br/com/pokemon/infrastructure/domain/PokemonAbility.class
 br/com/pokemon/command/PokemonCommand.class
 br/com/pokemon/infrastructure/domain/PokemonAbilities.class
@@ -7,7 +10,6 @@ br/com/pokemon/infrastructure/gateway/PokemonGateway.class
 br/com/pokemon/infrastructure/domain/PokemonResult.class
 br/com/pokemon/resource/PokemonResource.class
 br/com/pokemon/infrastructure/domain/PokemonType.class
-br/com/pokemon/infrastructure/mapper/PokemonDetailMapper.class
 br/com/pokemon/infrastructure/domain/PokemonResultList.class
 br/com/pokemon/infrastructure/domain/PokemonSprites.class
 br/com/pokemon/infrastructure/domain/PokemonDetails.class

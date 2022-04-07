@@ -5,11 +5,11 @@ import java.util.List;
 
 public class PokemonDetails {
 
-    public List<PokemonAbilities> abilities = new ArrayList<>();
-    public Long id;
-    public String name;
-    public PokemonSprites sprites;
-    public List<PokemonTypes> types = new ArrayList<>();
+    private List<PokemonAbilities> abilities = new ArrayList<>();
+    private Long id;
+    private String name;
+    private PokemonSprites sprites;
+    private List<PokemonTypes> types = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -40,5 +40,25 @@ public class PokemonDetails {
 
     public List<PokemonTypes> getTypes() {
         return types;
+    }
+
+    public void setAbilities(List<PokemonAbilities> abilities) {
+        this.abilities = abilities;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSprites(PokemonSprites sprites) {
+        this.sprites = sprites;
+    }
+
+    public void setTypes(List<PokemonTypes> types) {
+        this.types = types;
     }
 }

@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: br.com.pokemon.resource.PokemonResourceTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.013 s <<< FAILURE! - in br.com.pokemon.resource.PokemonResourceTest
+br.com.pokemon.resource.PokemonResourceTest.pokemonList  Time elapsed: 0.006 s  <<< ERROR!
+java.lang.NullPointerException
+	at br.com.pokemon.resource.PokemonResourceTest.pokemonList(PokemonResourceTest.java:69)
+

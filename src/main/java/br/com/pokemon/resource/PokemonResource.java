@@ -2,6 +2,7 @@ package br.com.pokemon.resource;
 
 import br.com.pokemon.command.PokemonCommand;
 import br.com.pokemon.resource.entities.PokemonDetailSimpleResponse;
+import br.com.pokemon.resource.mapper.PokemonDetailSimpleResponseMapper;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,15 +13,15 @@ import java.util.List;
 @Path("pokemons")
 public class PokemonResource {
 
-    PokemonCommand pokemonCommand;
+    private final PokemonCommand pokemonCommand;
 
-    public PokemonResource (PokemonCommand pokemonCommand) {
+    public PokemonResource(PokemonCommand pokemonCommand) {
         this.pokemonCommand = pokemonCommand;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<PokemonDetailSimpleResponse> pokemonList() {
-        return pokemonCommand.execute();
+        return PokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(this.pokemonCommand.execute());
     }
 }

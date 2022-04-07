@@ -1,0 +1,15 @@
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/resource/PokemonResource.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/gateway/PokemonGateway.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/domain/PokemonResultList.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/domain/PokemonDetailResponse.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/domain/PokemonSprites.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/domain/PokemonAbility.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/domain/PokemonTypes.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/domain/PokemonType.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/resource/entities/PokemonDetailSimpleResponse.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/domain/PokemonAbilities.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/command/mapper/PokemonDetailResponseMapper.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/command/PokemonCommand.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/domain/PokemonDetails.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/infrastructure/domain/PokemonResult.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/main/java/br/com/pokemon/resource/mapper/PokemonDetailSimpleResponseMapper.java

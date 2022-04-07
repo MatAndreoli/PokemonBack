@@ -1,9 +1,9 @@
 package br.com.pokemon.command;
 
+import br.com.pokemon.command.mapper.PokemonDetailResponseMapper;
+import br.com.pokemon.domain.PokemonDetailResponse;
 import br.com.pokemon.infrastructure.domain.PokemonResultList;
 import br.com.pokemon.infrastructure.gateway.PokemonGateway;
-import br.com.pokemon.infrastructure.mapper.PokemonDetailMapper;
-import br.com.pokemon.resource.entities.PokemonDetailSimpleResponse;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -16,21 +16,22 @@ import java.util.List;
 public class PokemonCommand {
 
     private final PokemonGateway pokemonListGateway;
+    PokemonDetailResponseMapper pokemonDetailResponseMapper = new PokemonDetailResponseMapper();
 
     @Inject
     public PokemonCommand(@RestClient PokemonGateway pokemonListGateway) {
         this.pokemonListGateway = pokemonListGateway;
     }
 
-    public List<PokemonDetailSimpleResponse> execute() {
-        PokemonResultList pokemonNameUrlResponses = pokemonListGateway.getPokemonList();
-        List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponse = new ArrayList<>();
+    public List<PokemonDetailResponse> execute() {
+        PokemonResultList pokemonNameUrlResponses = this.pokemonListGateway.getPokemonList();
+        List<PokemonDetailResponse> finalResponse = new ArrayList<>();
 
-        pokemonNameUrlResponses.results.forEach(result -> {
-            int a = pokemonNameUrlResponses.results.indexOf(result);
-            pokemonDetailSimpleResponse.add(PokemonDetailMapper.mapperFromDetailResponseToDetailSimpleResponse(pokemonListGateway.getPokemonById(a + 1)));
+        pokemonNameUrlResponses.getResults().forEach(result -> {
+            int a = pokemonNameUrlResponses.getResults().indexOf(result);
+            finalResponse.add(this.pokemonDetailResponseMapper.mapperFromDetailResponseToPokemonDetailResponse(this.pokemonListGateway.getPokemonById(a + 1)));
         });
-        return pokemonDetailSimpleResponse;
+        return finalResponse;
     }
 
 }

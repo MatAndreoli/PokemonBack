@@ -1,8 +1,8 @@
 package br.com.pokemon.infrastructure.domain;
 
 public class PokemonResult {
-    public String name;
-    public String url;
+    private String name;
+    private String url;
 
     public String getName() {
         return name;
@@ -10,5 +10,13 @@ public class PokemonResult {
 
     public String getUrl() {
         return url;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
