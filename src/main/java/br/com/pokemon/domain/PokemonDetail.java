@@ -3,17 +3,17 @@ package br.com.pokemon.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PokemonDetailResponse {
+public class PokemonDetail {
     public Long id;
     public String name;
     public String front_default;
     public List<String> abilities = new ArrayList<>();
     public List<String> types = new ArrayList<>();
 
-    public PokemonDetailResponse() {
+    public PokemonDetail() {
     }
 
-    public PokemonDetailResponse(Long id, String name, String front_default, List<String> abilities, List<String> types) {
+    public PokemonDetail(Long id, String name, String front_default, List<String> abilities, List<String> types) {
         this.id = id;
         this.name = name;
         this.front_default = front_default;
@@ -23,7 +23,7 @@ public class PokemonDetailResponse {
 
     @Override
     public String toString() {
-        return "FinalResponse{" +
+        return "PokemonDetail{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", front_default='" + front_default + '\'' +

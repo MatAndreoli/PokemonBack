@@ -3,7 +3,7 @@ package br.com.pokemon.infrastructure.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PokemonDetails {
+public class PokemonResultDetails {
 
     private List<PokemonAbilities> abilities = new ArrayList<>();
     private Long id;
@@ -13,7 +13,7 @@ public class PokemonDetails {
 
     @Override
     public String toString() {
-        return "PokemonDetailResponse{" +
+        return "PokemonResultDetails{" +
                 "abilities=" + abilities +
                 ", id=" + id +
                 ", name='" + name + '\'' +

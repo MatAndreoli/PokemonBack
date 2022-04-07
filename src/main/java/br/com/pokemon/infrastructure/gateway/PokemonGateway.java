@@ -1,6 +1,6 @@
 package br.com.pokemon.infrastructure.gateway;
 
-import br.com.pokemon.infrastructure.domain.PokemonDetails;
+import br.com.pokemon.infrastructure.domain.PokemonResultDetails;
 import br.com.pokemon.infrastructure.domain.PokemonResultList;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
@@ -22,5 +22,5 @@ public interface PokemonGateway {
     @GET
     @Path("pokemon/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    PokemonDetails getPokemonById(@PathParam("id") Integer id);
+    PokemonResultDetails getPokemonById(@PathParam("id") Integer id);
 }

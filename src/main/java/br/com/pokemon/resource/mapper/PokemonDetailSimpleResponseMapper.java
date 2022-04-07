@@ -1,24 +1,27 @@
 package br.com.pokemon.resource.mapper;
 
-import br.com.pokemon.domain.PokemonDetailResponse;
+import br.com.pokemon.domain.PokemonDetail;
 import br.com.pokemon.resource.entities.PokemonDetailSimpleResponse;
 
+import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
+@Singleton
 public class PokemonDetailSimpleResponseMapper {
-    public static List<PokemonDetailSimpleResponse> mapperFromDetailResponseToDetailSimpleResponse(List<PokemonDetailResponse> finalResponses) {
+
+    public List<PokemonDetailSimpleResponse> mapperFromDetailResponseToDetailSimpleResponse(List<PokemonDetail> pokemonDetails) {
         List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses = new ArrayList<>();
 
-        if (finalResponses.isEmpty()) {
+        if (pokemonDetails.isEmpty()) {
             System.out.println("Algo Deu Errado!!!");
         }
 
-        finalResponses.forEach(finalResponse -> {
-            List<String> abilitiesStr = new ArrayList<>(finalResponse.getAbilities());
-            List<String> typesStr = new ArrayList<>(finalResponse.getTypes());
-            pokemonDetailSimpleResponses.add(new PokemonDetailSimpleResponse(finalResponse.getId(), finalResponse.getName(),
-                    finalResponse.getFront_default(), abilitiesStr, typesStr));
+        pokemonDetails.forEach(pokemonDetailResponse -> {
+            List<String> abilitiesStr = new ArrayList<>(pokemonDetailResponse.getAbilities());
+            List<String> typesStr = new ArrayList<>(pokemonDetailResponse.getTypes());
+            pokemonDetailSimpleResponses.add(new PokemonDetailSimpleResponse(pokemonDetailResponse.getId(), pokemonDetailResponse.getName(),
+                    pokemonDetailResponse.getFront_default(), abilitiesStr, typesStr));
         });
 
         return pokemonDetailSimpleResponses;

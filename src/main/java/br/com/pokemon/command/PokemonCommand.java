@@ -1,14 +1,13 @@
 package br.com.pokemon.command;
 
-import br.com.pokemon.command.mapper.PokemonDetailResponseMapper;
-import br.com.pokemon.domain.PokemonDetailResponse;
+import br.com.pokemon.command.mapper.PokemonDetailMapper;
+import br.com.pokemon.domain.PokemonDetail;
 import br.com.pokemon.infrastructure.domain.PokemonResultList;
 import br.com.pokemon.infrastructure.gateway.PokemonGateway;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,22 +15,23 @@ import java.util.List;
 public class PokemonCommand {
 
     private final PokemonGateway pokemonListGateway;
-    PokemonDetailResponseMapper pokemonDetailResponseMapper = new PokemonDetailResponseMapper();
+    private final PokemonDetailMapper pokemonDetailMapper;
 
     @Inject
-    public PokemonCommand(@RestClient PokemonGateway pokemonListGateway) {
+    public PokemonCommand(@RestClient PokemonGateway pokemonListGateway, PokemonDetailMapper pokemonDetailMapper) {
         this.pokemonListGateway = pokemonListGateway;
+        this.pokemonDetailMapper = pokemonDetailMapper;
     }
 
-    public List<PokemonDetailResponse> execute() {
-        PokemonResultList pokemonNameUrlResponses = this.pokemonListGateway.getPokemonList();
-        List<PokemonDetailResponse> finalResponse = new ArrayList<>();
+    public List<PokemonDetail> execute() {
+        PokemonResultList pokemonResultList = this.pokemonListGateway.getPokemonList();
+        List<PokemonDetail> pokemonDetails = new ArrayList<>();
 
-        pokemonNameUrlResponses.getResults().forEach(result -> {
-            int a = pokemonNameUrlResponses.getResults().indexOf(result);
-            finalResponse.add(this.pokemonDetailResponseMapper.mapperFromDetailResponseToPokemonDetailResponse(this.pokemonListGateway.getPokemonById(a + 1)));
+        pokemonResultList.getResults().forEach(result -> {
+            int a = pokemonResultList.getResults().indexOf(result);
+            pokemonDetails.add(this.pokemonDetailMapper.mapperFromResultDetailsToPokemonDetail(this.pokemonListGateway.getPokemonById(a + 1)));
         });
-        return finalResponse;
+        return pokemonDetails;
     }
 
 }
