@@ -93,7 +93,7 @@ class PokemonCommandTest {
     @DisplayName("when method execute is called should call " +
             "pokemonDetailResponseMapper.mapperFromResultDetailsToPokemonDetail(PokemonResultDetails obj) at least twice")
     @Test
-    void verifymapperFromDetailResponseToPokemonDetailResponse() {
+    void verifyMapperFromDetailResponseToPokemonDetailResponse() {
         PokemonResultDetails pokemonDetails = PokemonResultDetailsTemplate.gimmeAValid();
         PokemonResultList pokemonResultList = PokemonResultListTemplate.gimmeAValid2();
         PokemonDetail pokemonDetail = PokemonDetailTemplate.gimmeAValid();

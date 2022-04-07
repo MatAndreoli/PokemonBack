@@ -55,7 +55,7 @@ class PokemonResourceTest {
 
     @DisplayName("when method pokemonResource.pokemonList() is called should call pokemonCommandMock.execute() at least once")
     @Test
-    void test() {
+    void verifyCommandExecute() {
         List<PokemonDetail> pokemonDetailResponses = PokemonDeatilsResponseTemplate.gimmeAValidList();
 
         Mockito.when(pokemonCommandMock.execute()).thenReturn(pokemonDetailResponses);
@@ -68,7 +68,7 @@ class PokemonResourceTest {
     @DisplayName("when method pokemonResource.pokemonList() is called " +
             "should call pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(List<PokemonDetail> obj) at least once")
     @Test
-    void test1() {
+    void verifyMapperFromDetailResponseToDetailSimpleResponse() {
         List<PokemonDetail> pokemonDetailResponses = PokemonDeatilsResponseTemplate.gimmeAValidList();
         List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses = PokemonDetailSimpleResponseTemplate.gimmeAValidList();
 

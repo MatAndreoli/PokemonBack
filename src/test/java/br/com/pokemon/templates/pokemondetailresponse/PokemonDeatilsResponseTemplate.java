@@ -8,6 +8,7 @@ import br.com.six2six.fixturefactory.loader.TemplateLoader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PokemonDeatilsResponseTemplate implements TemplateLoader {
     public static final String VALID = "valid";
@@ -18,19 +19,30 @@ public class PokemonDeatilsResponseTemplate implements TemplateLoader {
 
     @Override
     public void load() {
-        List<String> abilities = new ArrayList<>();
-        List<String> types = new ArrayList<>();
-        abilities.add("fire ball");
-        abilities.add("fire ball");
-        types.add("fire");
-        types.add("fire");
         Fixture.of(PokemonDetail.class).addTemplate(VALID, new Rule() {{
             add("id", 1L);
             add("name", "charmander");
             add("front_default", "localhost:image/url");
-            add("abilities", abilities);
-            add("types", types);
+            add("abilities", getListTo("abilities"));
+            add("types", getListTo("types"));
         }});
+    }
+
+    public List<String> getListTo(String kind) {
+        List<String> list = new ArrayList<>();
+
+        if (Objects.equals(kind, "abilities")) {
+            list.add("fire ball");
+            list.add("fire ball");
+        }
+        else if (Objects.equals(kind, "types")) {
+            list.add("fire");
+            list.add("fire");
+        }
+        else {
+            throw new IllegalArgumentException("The value is invalid, should be 'abilities' or 'types'");
+        }
+        return list;
     }
 
     public static List<PokemonDetail> gimmeAValidList() {
