@@ -3,7 +3,6 @@ package br.com.pokemon.templates.pokemondetailsimpleresponse;
 import br.com.pokemon.resource.entities.PokemonDetailSimpleResponse;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
-import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
 
 import java.util.ArrayList;
@@ -12,10 +11,6 @@ import java.util.Objects;
 
 public class PokemonDetailSimpleResponseTemplate implements TemplateLoader {
     private static final String VALID = "valid";
-
-    public static void loadTemplates(){
-        FixtureFactoryLoader.loadTemplates("br.com.pokemon.templates.pokemondetailsimpleresponse");
-    }
 
     @Override
     public void load() {

@@ -8,8 +8,7 @@ import br.com.pokemon.templates.TemplatesPath;
 import br.com.pokemon.templates.pokemondetail.PokemonDetailTemplate;
 import br.com.pokemon.templates.pokemondetailresponse.PokemonDeatilsResponseTemplate;
 import br.com.pokemon.templates.pokemonresult.PokemonResultListTemplate;
-import br.com.pokemon.templates.pokemonresult.PokemonResultTemplate;
-import br.com.pokemon.templates.pokemondetails.PokemonResultDetailsTemplate;
+import br.com.pokemon.templates.pokemonresultdetails.PokemonResultDetailsTemplate;
 
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import org.junit.jupiter.api.BeforeEach;

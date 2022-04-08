@@ -1,18 +1,13 @@
-package br.com.pokemon.templates.pokemondetails;
+package br.com.pokemon.templates.pokemonresultdetails;
 
 import br.com.pokemon.infrastructure.domain.PokemonAbilities;
 import br.com.pokemon.infrastructure.domain.PokemonAbility;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
-import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
 
 public class AbilitiesTemplate implements TemplateLoader {
     public static final String VALID = "valid";
-
-    public static void loadTemplates() {
-        FixtureFactoryLoader.loadTemplates("br.com.pokemon.templates.details");
-    }
 
     @Override
     public void load() {

@@ -4,7 +4,6 @@ import br.com.pokemon.infrastructure.domain.PokemonResult;
 import br.com.pokemon.infrastructure.domain.PokemonResultList;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
-import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
 
 public class PokemonResultListTemplate implements TemplateLoader {
@@ -12,11 +11,6 @@ public class PokemonResultListTemplate implements TemplateLoader {
     public static final String VALID_RESULT = "valid";
     public static final String VALID3 = "valid3";
     public static final String VALID2 = "valid2";
-
-
-    public static void loadTemplates() {
-        FixtureFactoryLoader.loadTemplates("br.com.pokemon.templates.pokemonresult");
-    }
 
     @Override
     public void load() {
