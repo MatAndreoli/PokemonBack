@@ -5,7 +5,7 @@ import br.com.pokemon.domain.PokemonDetail;
 import br.com.pokemon.resource.entities.PokemonDetailSimpleResponse;
 import br.com.pokemon.resource.mapper.PokemonDetailSimpleResponseMapper;
 import br.com.pokemon.templates.TemplatesPath;
-import br.com.pokemon.templates.pokemondetailresponse.PokemonDeatilsResponseTemplate;
+import br.com.pokemon.templates.pokemondetail.PokemonDeatilTemplate;
 import br.com.pokemon.templates.pokemondetailsimpleresponse.PokemonDetailSimpleResponseTemplate;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,7 +42,7 @@ class PokemonResourceTest {
     @DisplayName("when method pokemonResource.pokemonList() is called should return a List<PokemonDetailSimpleResponse> obj")
     @Test
     void pokemonList() {
-        List<PokemonDetail> pokemonDetailResponses = PokemonDeatilsResponseTemplate.gimmeAValidList();
+        List<PokemonDetail> pokemonDetailResponses = PokemonDeatilTemplate.gimmeAValidList();
         List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses = PokemonDetailSimpleResponseTemplate.gimmeAValidList();
 
         Mockito.when(pokemonCommandMock.execute()).thenReturn(pokemonDetailResponses);
@@ -57,7 +57,7 @@ class PokemonResourceTest {
     @DisplayName("when method pokemonResource.pokemonList() is called should call pokemonCommandMock.execute() at least once")
     @Test
     void verifyCommandExecute() {
-        List<PokemonDetail> pokemonDetailResponses = PokemonDeatilsResponseTemplate.gimmeAValidList();
+        List<PokemonDetail> pokemonDetailResponses = PokemonDeatilTemplate.gimmeAValidList();
 
         Mockito.when(pokemonCommandMock.execute()).thenReturn(pokemonDetailResponses);
 
@@ -70,7 +70,7 @@ class PokemonResourceTest {
             "should call pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(List<PokemonDetail> obj) at least once")
     @Test
     void verifyMapperFromDetailResponseToDetailSimpleResponse() {
-        List<PokemonDetail> pokemonDetailResponses = PokemonDeatilsResponseTemplate.gimmeAValidList();
+        List<PokemonDetail> pokemonDetailResponses = PokemonDeatilTemplate.gimmeAValidList();
         List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses = PokemonDetailSimpleResponseTemplate.gimmeAValidList();
 
         Mockito.when(pokemonCommandMock.execute()).thenReturn(pokemonDetailResponses);

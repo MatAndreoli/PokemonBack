@@ -5,8 +5,7 @@ import br.com.pokemon.domain.PokemonDetail;
 import br.com.pokemon.infrastructure.domain.*;
 import br.com.pokemon.infrastructure.gateway.PokemonGateway;
 import br.com.pokemon.templates.TemplatesPath;
-import br.com.pokemon.templates.pokemondetail.PokemonDetailTemplate;
-import br.com.pokemon.templates.pokemondetailresponse.PokemonDeatilsResponseTemplate;
+import br.com.pokemon.templates.pokemondetail.PokemonDeatilTemplate;
 import br.com.pokemon.templates.pokemonresult.PokemonResultListTemplate;
 import br.com.pokemon.templates.pokemonresultdetails.PokemonResultDetailsTemplate;
 
@@ -47,7 +46,7 @@ class PokemonCommandTest {
     @Test
     void execute() {
         PokemonResultDetails pokemonDetails = PokemonResultDetailsTemplate.gimmeAValid();
-        List<PokemonDetail> pokemonDetailResponseList = PokemonDeatilsResponseTemplate.gimmeAValidList();
+        List<PokemonDetail> pokemonDetailResponseList = PokemonDeatilTemplate.gimmeAValidList();
         PokemonResultList pokemonResultList = PokemonResultListTemplate.gimmeAValid2();
 
         Mockito.when(pokemonGatewayMock.getPokemonList()).thenReturn(pokemonResultList);
@@ -77,7 +76,7 @@ class PokemonCommandTest {
     void verifyGatewayGetPokemonById() {
         PokemonResultList pokemonResultList = PokemonResultListTemplate.gimmeAValid2();
         PokemonResultDetails pokemonDetails = PokemonResultDetailsTemplate.gimmeAValid();
-        PokemonDetail pokemonDetail = PokemonDetailTemplate.gimmeAValid();
+        PokemonDetail pokemonDetail = PokemonDeatilTemplate.gimmeAValid();
 
         Mockito.when(pokemonGatewayMock.getPokemonList()).thenReturn(pokemonResultList);
         Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonDetails);
@@ -94,7 +93,7 @@ class PokemonCommandTest {
     void verifyMapperFromDetailResponseToPokemonDetailResponse() {
         PokemonResultDetails pokemonDetails = PokemonResultDetailsTemplate.gimmeAValid();
         PokemonResultList pokemonResultList = PokemonResultListTemplate.gimmeAValid2();
-        PokemonDetail pokemonDetail = PokemonDetailTemplate.gimmeAValid();
+        PokemonDetail pokemonDetail = PokemonDeatilTemplate.gimmeAValid();
 
         Mockito.when(pokemonGatewayMock.getPokemonList()).thenReturn(pokemonResultList);
         Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonDetails);

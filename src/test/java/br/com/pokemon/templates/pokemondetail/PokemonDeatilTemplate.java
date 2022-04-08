@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class PokemonDetailTemplate implements TemplateLoader {
-    private static final String VALID = "valid";
+public class PokemonDeatilTemplate implements TemplateLoader {
+    public static final String VALID = "valid";
 
     @Override
     public void load() {
-        Fixture.of(PokemonDetail.class).addTemplate(VALID, new Rule(){{
+        Fixture.of(PokemonDetail.class).addTemplate(VALID, new Rule() {{
             add("id", 1L);
             add("name", "charmander");
             add("front_default", "localhost:image/url");
@@ -38,6 +38,10 @@ public class PokemonDetailTemplate implements TemplateLoader {
             throw new IllegalArgumentException("The value is invalid, should be 'abilities' or 'types'");
         }
         return list;
+    }
+
+    public static List<PokemonDetail> gimmeAValidList() {
+        return Fixture.from(PokemonDetail.class).gimme(2, VALID);
     }
 
     public static PokemonDetail gimmeAValid() {
