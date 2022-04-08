@@ -1,12 +1,14 @@
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/command/PokemonCommandTest.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/templates/TemplatesPath.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/templates/pokemondetailsimpleresponse/PokemonDetailSimpleResponseTemplate.java
-/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/templates/pokemondetailresponse/PokemonDeatilsResponseTemplate.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/templates/pokemonresultdetails/PokemonResultDetailsTemplate.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/resource/PokemonResourceTest.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/templates/pokemonresultdetails/TypeTemplate.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/resource/mapper/PokemonDetailSimpleResponseMapperTest.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/templates/pokemonresultdetails/SpritesTemplate.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/command/mapper/PokemonDetailMapperTest.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/templates/pokemonresultdetails/AbilitiesTemplate.java
+/home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/templates/pokemondetail/PokemonDeatilTemplate.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/templates/pokemonresultdetails/AbilityTemplate.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/templates/pokemonresult/PokemonResultTemplate.java
 /home/matheusav/Área de Trabalho/Pokemon/BE/PokemonBack/src/test/java/br/com/pokemon/templates/pokemonresultdetails/TypesTemplate.java

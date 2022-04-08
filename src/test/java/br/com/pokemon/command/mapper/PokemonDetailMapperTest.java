@@ -27,7 +27,7 @@ class PokemonDetailMapperTest {
         pokemonDetailMapper = new PokemonDetailMapper();
     }
 
-    @DisplayName("Should return a PokemonDetail when called with a valid param")
+    @DisplayName("when method mapperFromResultDetailsToPokemonDetail is called should return a PokemonDetail obj")
     @Test
     void mapperFromResultDetailsToPokemonDetail() {
         PokemonResultDetails pokemonResultDetails = PokemonResultDetailsTemplate.gimmeAValid();
@@ -35,5 +35,11 @@ class PokemonDetailMapperTest {
         PokemonDetail pokemonDetail = pokemonDetailMapper.mapperFromResultDetailsToPokemonDetail(pokemonResultDetails);
 
         assertEquals(pokemonDetail.toString(), pokemonDetailTemp.toString());
+    }
+
+    @DisplayName("when method mapperFromResultDetailsToPokemonDetail is called with an empty list should throw a NullPointerException")
+    @Test
+    void mapperFromResultDetailsToPokemonDetail1() {
+        assertThrows(NullPointerException.class, () -> pokemonDetailMapper.mapperFromResultDetailsToPokemonDetail(null));
     }
 }
