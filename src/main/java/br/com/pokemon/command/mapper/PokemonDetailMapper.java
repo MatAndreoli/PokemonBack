@@ -15,9 +15,8 @@ public class PokemonDetailMapper {
         List<String> abilitiesStr = new ArrayList<>();
 
         if (pokemonDetailResponse == null) {
-            System.out.println("Algo Deu Errado!!!");
+            throw new NullPointerException("PokemonResultDetails cannot be null");
         }
-        assert pokemonDetailResponse != null;
 
         pokemonDetailResponse.getAbilities().forEach(abilities -> abilitiesStr.add(abilities.getAbility().getName()));
         pokemonDetailResponse.getTypes().forEach(types -> typesStr.add(types.getType().getName()));

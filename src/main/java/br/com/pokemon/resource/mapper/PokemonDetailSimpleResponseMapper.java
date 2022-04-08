@@ -14,7 +14,7 @@ public class PokemonDetailSimpleResponseMapper {
         List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses = new ArrayList<>();
 
         if (pokemonDetails.isEmpty()) {
-            System.out.println("Algo Deu Errado!!!");
+            throw new NullPointerException("PokemonResultDetails cannot be null");
         }
 
         pokemonDetails.forEach(pokemonDetailResponse -> {
