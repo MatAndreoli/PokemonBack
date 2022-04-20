@@ -7,6 +7,7 @@ import br.com.pokemon.resource.mapper.PokemonDetailSimpleResponseMapper;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -25,8 +26,9 @@ public class PokemonResource {
     }
 
     @GET
+    @Path("/{limit}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<PokemonDetailSimpleResponse> pokemonList() {
-        return this.pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(this.pokemonCommand.execute(50));
+    public List<PokemonDetailSimpleResponse> pokemonList(@PathParam("limit") Integer limit) {
+        return this.pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(this.pokemonCommand.execute(limit));
     }
 }

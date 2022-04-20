@@ -1,3 +1,15 @@
+GET http://localhost:8080/pokemons/30
+
+<> 2022-04-20T144456.200.json
+
+###
+
+GET https://pokeapi.co/api/v2/pokemon?limit=12
+
+<> 2022-04-20T144349.200.json
+
+###
+
 GET https://pokeapi.co/api/v2/pokemon?limit=12
 
 <> 2022-04-20T132239.200.json

@@ -12,11 +12,6 @@ import javax.ws.rs.core.MediaType;
 public interface PokemonGateway {
 
     @GET
-    @Path("pokemon")
-    @Produces(MediaType.APPLICATION_JSON)
-    PokemonResultList getPokemonList();
-
-    @GET
     @Path("pokemon/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     PokemonResultDetails getPokemonById(@PathParam("id") Integer id);

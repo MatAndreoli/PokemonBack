@@ -45,10 +45,10 @@ class PokemonResourceTest {
         List<PokemonDetail> pokemonDetailResponses = PokemonDeatilTemplate.gimmeAValidList();
         List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses = PokemonDetailSimpleResponseTemplate.gimmeAValidList();
 
-        Mockito.when(pokemonCommandMock.execute()).thenReturn(pokemonDetailResponses);
+        Mockito.when(pokemonCommandMock.execute(Mockito.anyInt())).thenReturn(pokemonDetailResponses);
         Mockito.when(pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(Mockito.<PokemonDetail>anyList())).thenReturn(pokemonDetailSimpleResponses);
 
-        List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses1 = pokemonResource.pokemonList();
+        List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses1 = pokemonResource.pokemonList(Mockito.anyInt());
 
         assertEquals(pokemonDetailSimpleResponses.toString(), pokemonDetailSimpleResponses1.toString());
 
@@ -59,11 +59,11 @@ class PokemonResourceTest {
     void verifyCommandExecute() {
         List<PokemonDetail> pokemonDetailResponses = PokemonDeatilTemplate.gimmeAValidList();
 
-        Mockito.when(pokemonCommandMock.execute()).thenReturn(pokemonDetailResponses);
+        Mockito.when(pokemonCommandMock.execute(Mockito.anyInt())).thenReturn(pokemonDetailResponses);
 
-        pokemonResource.pokemonList();
+        pokemonResource.pokemonList(Mockito.anyInt());
 
-        Mockito.verify(pokemonCommandMock, Mockito.atLeast(1)).execute();
+        Mockito.verify(pokemonCommandMock, Mockito.atLeast(1)).execute(Mockito.anyInt());
     }
 
     @DisplayName("when method pokemonResource.pokemonList() is called " +
@@ -73,11 +73,11 @@ class PokemonResourceTest {
         List<PokemonDetail> pokemonDetailResponses = PokemonDeatilTemplate.gimmeAValidList();
         List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses = PokemonDetailSimpleResponseTemplate.gimmeAValidList();
 
-        Mockito.when(pokemonCommandMock.execute()).thenReturn(pokemonDetailResponses);
+        Mockito.when(pokemonCommandMock.execute(Mockito.anyInt())).thenReturn(pokemonDetailResponses);
         Mockito.when(pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(Mockito.<PokemonDetail>anyList()))
                 .thenReturn(pokemonDetailSimpleResponses);
 
-        pokemonResource.pokemonList();
+        pokemonResource.pokemonList(Mockito.anyInt());
 
         Mockito.verify(pokemonDetailSimpleResponseMapper, Mockito.atLeast(1)).mapperFromDetailResponseToDetailSimpleResponse(Mockito.anyList());
     }
