@@ -4,10 +4,7 @@ import br.com.pokemon.infrastructure.domain.PokemonResultDetails;
 import br.com.pokemon.infrastructure.domain.PokemonResultList;
 import org.eclipse.microprofile.rest.client.inject.RegisterRestClient;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @RegisterRestClient(baseUri = "https://pokeapi.co/api/v2/")
@@ -23,4 +20,9 @@ public interface PokemonGateway {
     @Path("pokemon/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     PokemonResultDetails getPokemonById(@PathParam("id") Integer id);
+
+    @GET
+    @Path("pokemon")
+    @Produces(MediaType.APPLICATION_JSON)
+    PokemonResultList getPokemonNumberedList(@QueryParam("limit") Integer limit);
 }

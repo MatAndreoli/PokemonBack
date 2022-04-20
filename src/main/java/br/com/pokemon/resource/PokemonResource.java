@@ -27,6 +27,6 @@ public class PokemonResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<PokemonDetailSimpleResponse> pokemonList() {
-        return this.pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(this.pokemonCommand.execute());
+        return this.pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(this.pokemonCommand.execute(50));
     }
 }

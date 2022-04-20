@@ -1,0 +1,6 @@
+GET https://pokeapi.co/api/v2/pokemon?limit=12
+
+<> 2022-04-20T132239.200.json
+
+###
+

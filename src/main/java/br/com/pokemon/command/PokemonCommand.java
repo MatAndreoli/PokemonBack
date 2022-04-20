@@ -23,8 +23,8 @@ public class PokemonCommand {
         this.pokemonDetailMapper = pokemonDetailMapper;
     }
 
-    public List<PokemonDetail> execute() {
-        PokemonResultList pokemonResultList = this.pokemonListGateway.getPokemonList();
+    public List<PokemonDetail> execute(Integer limit) {
+        PokemonResultList pokemonResultList = this.pokemonListGateway.getPokemonNumberedList(limit);
         List<PokemonDetail> pokemonDetails = new ArrayList<>();
 
         pokemonResultList.getResults().forEach(result -> {
