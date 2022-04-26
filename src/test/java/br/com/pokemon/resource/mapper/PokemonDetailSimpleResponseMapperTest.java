@@ -6,10 +6,7 @@ import br.com.pokemon.templates.TemplatesPath;
 import br.com.pokemon.templates.pokemondetail.PokemonDeatilTemplate;
 import br.com.pokemon.templates.pokemondetailsimpleresponse.PokemonDetailSimpleResponseTemplate;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -31,21 +28,30 @@ class PokemonDetailSimpleResponseMapperTest {
         pokemonDetailSimpleResponseMapper = new PokemonDetailSimpleResponseMapper();
     }
 
-    @DisplayName("when method mapperFromDetailResponseToDetailSimpleResponse is called should return a List<PokemonDetailSimpleResponse> obj")
-    @Test
-    void mapperFromDetailResponseToDetailSimpleResponse() {
-        List<PokemonDetail> pokemonDetailsTemp = PokemonDeatilTemplate.gimmeAValidList();
-        List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponsesTemp = PokemonDetailSimpleResponseTemplate.gimmeAValidList();
-        List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses = pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(pokemonDetailsTemp);
+    @Nested
+    @DisplayName("when method mapperFromDetailResponseToDetailSimpleResponse is called")
+    class Mapper {
+        @DisplayName("then should return a List<PokemonDetailSimpleResponse> obj")
+        @Test
+        void mapperFromDetailResponseToDetailSimpleResponse() {
+            List<PokemonDetail> pokemonDetailsTemp = PokemonDeatilTemplate.gimmeAValidList();
+            List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponsesTemp = PokemonDetailSimpleResponseTemplate.gimmeAValidList();
+            List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses = pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(pokemonDetailsTemp);
 
-        assertEquals(pokemonDetailSimpleResponses.size(), pokemonDetailSimpleResponsesTemp.size());
+            assertEquals(pokemonDetailSimpleResponses.size(), pokemonDetailSimpleResponsesTemp.size());
+        }
+
+        @Nested
+        @DisplayName("and its param is empty")
+        class Mapper1 {
+            @DisplayName("then should throw a NullPointerException")
+            @Test
+            void mapperFromDetailResponseToDetailSimpleResponse1() {
+                List<PokemonDetail> pokemonDetailsTemp = new ArrayList<>();
+
+                assertThrows(NullPointerException.class, () -> pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(pokemonDetailsTemp));
+            }
+        }
     }
 
-    @DisplayName("when method mapperFromDetailResponseToDetailSimpleResponse is called with an empty list should throw a NullPointerException")
-    @Test
-    void mapperFromDetailResponseToDetailSimpleResponse1() {
-        List<PokemonDetail> pokemonDetailsTemp = new ArrayList<>();
-
-        assertThrows(NullPointerException.class, () -> pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(pokemonDetailsTemp));
-    }
 }

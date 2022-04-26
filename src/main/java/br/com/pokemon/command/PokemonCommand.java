@@ -28,8 +28,8 @@ public class PokemonCommand {
         List<PokemonDetail> pokemonDetails = new ArrayList<>();
 
         pokemonResultList.getResults().forEach(result -> {
-            int a = pokemonResultList.getResults().indexOf(result);
-            pokemonDetails.add(this.pokemonDetailMapper.mapperFromResultDetailsToPokemonDetail(this.pokemonListGateway.getPokemonById(a + 1)));
+            int currentPokemonIndex = pokemonResultList.getResults().indexOf(result);
+            pokemonDetails.add(this.pokemonDetailMapper.mapperFromResultDetailsToPokemonDetail(this.pokemonListGateway.getPokemonById(currentPokemonIndex + 1)));
         });
         return pokemonDetails;
     }
