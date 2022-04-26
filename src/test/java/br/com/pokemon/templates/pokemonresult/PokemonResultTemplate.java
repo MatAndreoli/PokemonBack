@@ -13,7 +13,7 @@ public class PokemonResultTemplate implements TemplateLoader {
     public void load() {
         Fixture.of(PokemonResult.class).addTemplate(VALID, new Rule() {{
             add("name", "charmander");
-            add("url", "localhost:8080/image");
+            add("url", "localhost:8080/image/1");
         }});
     }
 

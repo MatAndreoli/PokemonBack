@@ -32,7 +32,7 @@ class PokemonCommandTest {
     @Mock
     PokemonDetailMapper pokemonDetailResponseMapper;
 
-    PokemonResultDetails pokemonDetails;
+    PokemonResultDetails pokemonResultDetails;
     PokemonResultList pokemonResultList;
     PokemonDetail pokemonDetail;
 
@@ -40,7 +40,7 @@ class PokemonCommandTest {
     void initData() {
         FixtureFactoryLoader.loadTemplates(TemplatesPath.TEMPLATES_PATH);
         pokemonCommand = new PokemonCommand(pokemonGatewayMock, pokemonDetailResponseMapper);
-        pokemonDetails = PokemonResultDetailsTemplate.gimmeAValid();
+        pokemonResultDetails = PokemonResultDetailsTemplate.gimmeAValid();
         pokemonResultList = PokemonResultListTemplate.gimmeAValid2();
         pokemonDetail = PokemonDeatilTemplate.gimmeAValid();
     }
@@ -54,7 +54,7 @@ class PokemonCommandTest {
             List<PokemonDetail> pokemonDetailResponseList = PokemonDeatilTemplate.gimmeAValidList();
 
             Mockito.when(pokemonGatewayMock.getPokemonNumberedList(Mockito.anyInt())).thenReturn(pokemonResultList);
-            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonDetails);
+            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonResultDetails);
 
             List<PokemonDetail> pokemonDetailResponsesResult = pokemonCommand.execute(Mockito.anyInt());
 
@@ -65,7 +65,7 @@ class PokemonCommandTest {
         @Test
         void verifyGatewayGetPokemonNumberedList() {
             Mockito.when(pokemonGatewayMock.getPokemonNumberedList(Mockito.anyInt())).thenReturn(pokemonResultList);
-            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonDetails);
+            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonResultDetails);
 
             pokemonCommand.execute(Mockito.anyInt());
 
@@ -76,7 +76,7 @@ class PokemonCommandTest {
         @Test
         void verifyGatewayGetPokemonById() {
             Mockito.when(pokemonGatewayMock.getPokemonNumberedList(Mockito.anyInt())).thenReturn(pokemonResultList);
-            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonDetails);
+            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonResultDetails);
             Mockito.when(pokemonDetailResponseMapper.mapperFromResultDetailsToPokemonDetail(Mockito.any())).thenReturn(pokemonDetail);
 
             pokemonCommand.execute(Mockito.anyInt());
@@ -88,7 +88,7 @@ class PokemonCommandTest {
         @Test
         void verifyMapperFromResultDetailsToPokemonDetail() {
             Mockito.when(pokemonGatewayMock.getPokemonNumberedList(Mockito.anyInt())).thenReturn(pokemonResultList);
-            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonDetails);
+            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonResultDetails);
             Mockito.when(pokemonDetailResponseMapper.mapperFromResultDetailsToPokemonDetail(Mockito.any())).thenReturn(pokemonDetail);
 
             pokemonCommand.execute(Mockito.anyInt());
