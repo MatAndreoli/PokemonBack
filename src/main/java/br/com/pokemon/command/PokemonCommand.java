@@ -29,6 +29,7 @@ public class PokemonCommand {
         PokemonResultList pokemonResultList = this.pokemonListGateway.getPokemonNumberedList(limit);
 
         return pokemonResultList.getResults().stream()
+                .parallel()
                 .map(PokemonResult::getUrl)
                 .map(PokemonCommand::getPokemonIndex)
                 .map(this.pokemonListGateway::getPokemonById)
