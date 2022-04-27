@@ -34,9 +34,9 @@ class PokemonDetailSimpleResponseMapperTest {
         @DisplayName("then should return a List<PokemonDetailSimpleResponse> obj")
         @Test
         void mapperFromDetailResponseToDetailSimpleResponse() {
-            List<PokemonDetail> pokemonDetailsTemp = PokemonDeatilTemplate.gimmeAValidList();
+            List<PokemonDetail> pokemonDetails = PokemonDeatilTemplate.gimmeAValidList();
             List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponsesTemp = PokemonDetailSimpleResponseTemplate.gimmeAValidList();
-            List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses = pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(pokemonDetailsTemp);
+            List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses = pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(pokemonDetails);
 
             assertEquals(pokemonDetailSimpleResponses.size(), pokemonDetailSimpleResponsesTemp.size());
         }
@@ -47,9 +47,9 @@ class PokemonDetailSimpleResponseMapperTest {
             @DisplayName("then should throw a NullPointerException")
             @Test
             void mapperFromDetailResponseToDetailSimpleResponse1() {
-                List<PokemonDetail> pokemonDetailsTemp = new ArrayList<>();
+                List<PokemonDetail> pokemonDetailsEmpty = new ArrayList<>();
 
-                assertThrows(NullPointerException.class, () -> pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(pokemonDetailsTemp));
+                assertThrows(NullPointerException.class, () -> pokemonDetailSimpleResponseMapper.mapperFromDetailResponseToDetailSimpleResponse(pokemonDetailsEmpty));
             }
         }
     }

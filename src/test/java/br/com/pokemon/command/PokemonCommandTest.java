@@ -30,19 +30,27 @@ class PokemonCommandTest {
     PokemonGateway pokemonGatewayMock;
 
     @Mock
-    PokemonDetailMapper pokemonDetailResponseMapper;
+    PokemonDetailMapper pokemonDetailMapperMock;
 
     PokemonResultDetails pokemonResultDetails;
     PokemonResultList pokemonResultList;
     PokemonDetail pokemonDetail;
+    List<PokemonDetail> pokemonDetails;
 
     @BeforeEach
     void initData() {
         FixtureFactoryLoader.loadTemplates(TemplatesPath.TEMPLATES_PATH);
-        pokemonCommand = new PokemonCommand(pokemonGatewayMock, pokemonDetailResponseMapper);
+
+        pokemonCommand = new PokemonCommand(pokemonGatewayMock, pokemonDetailMapperMock);
         pokemonResultDetails = PokemonResultDetailsTemplate.gimmeAValid();
         pokemonResultList = PokemonResultListTemplate.gimmeAValid2();
         pokemonDetail = PokemonDeatilTemplate.gimmeAValid();
+
+        Mockito.when(pokemonGatewayMock.getPokemonNumberedList(Mockito.anyInt())).thenReturn(pokemonResultList);
+        Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonResultDetails);
+        Mockito.when(pokemonDetailMapperMock.mapperFromResultDetailsToPokemonDetail(Mockito.any())).thenReturn(pokemonDetail);
+
+        pokemonDetails = pokemonCommand.execute(Mockito.anyInt());
     }
 
     @Nested
@@ -53,47 +61,25 @@ class PokemonCommandTest {
         void execute() {
             List<PokemonDetail> pokemonDetailResponseList = PokemonDeatilTemplate.gimmeAValidList();
 
-            Mockito.when(pokemonGatewayMock.getPokemonNumberedList(Mockito.anyInt())).thenReturn(pokemonResultList);
-            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonResultDetails);
-
-            List<PokemonDetail> pokemonDetailResponsesResult = pokemonCommand.execute(Mockito.anyInt());
-
-            assertEquals(pokemonDetailResponseList.size(), pokemonDetailResponsesResult.size());
+            assertEquals(pokemonDetailResponseList.size(), pokemonDetails.size());
         }
 
         @DisplayName("then should call  method getPokemonNumberedList")
         @Test
         void verifyGatewayGetPokemonNumberedList() {
-            Mockito.when(pokemonGatewayMock.getPokemonNumberedList(Mockito.anyInt())).thenReturn(pokemonResultList);
-            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonResultDetails);
-
-            pokemonCommand.execute(Mockito.anyInt());
-
             Mockito.verify(pokemonGatewayMock, Mockito.atLeast(1)).getPokemonNumberedList(Mockito.anyInt());
         }
 
         @DisplayName("then should call method getPokemonById")
         @Test
         void verifyGatewayGetPokemonById() {
-            Mockito.when(pokemonGatewayMock.getPokemonNumberedList(Mockito.anyInt())).thenReturn(pokemonResultList);
-            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonResultDetails);
-            Mockito.when(pokemonDetailResponseMapper.mapperFromResultDetailsToPokemonDetail(Mockito.any())).thenReturn(pokemonDetail);
-
-            pokemonCommand.execute(Mockito.anyInt());
-
             Mockito.verify(pokemonGatewayMock, Mockito.atLeast(2)).getPokemonById(Mockito.anyInt());
         }
 
         @DisplayName("then should call method mapperFromResultDetailsToPokemonDetail")
         @Test
         void verifyMapperFromResultDetailsToPokemonDetail() {
-            Mockito.when(pokemonGatewayMock.getPokemonNumberedList(Mockito.anyInt())).thenReturn(pokemonResultList);
-            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonResultDetails);
-            Mockito.when(pokemonDetailResponseMapper.mapperFromResultDetailsToPokemonDetail(Mockito.any())).thenReturn(pokemonDetail);
-
-            pokemonCommand.execute(Mockito.anyInt());
-
-            Mockito.verify(pokemonDetailResponseMapper, Mockito.atLeast(2)).mapperFromResultDetailsToPokemonDetail(Mockito.any());
+            Mockito.verify(pokemonDetailMapperMock, Mockito.atLeast(2)).mapperFromResultDetailsToPokemonDetail(Mockito.any());
         }
     }
 
