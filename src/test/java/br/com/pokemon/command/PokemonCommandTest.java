@@ -37,25 +37,26 @@ class PokemonCommandTest {
     PokemonDetail pokemonDetail;
     List<PokemonDetail> pokemonDetails;
 
-    @BeforeEach
-    void initData() {
-        FixtureFactoryLoader.loadTemplates(TemplatesPath.TEMPLATES_PATH);
-
-        pokemonCommand = new PokemonCommand(pokemonGatewayMock, pokemonDetailMapperMock);
-        pokemonResultDetails = PokemonResultDetailsTemplate.gimmeAValid();
-        pokemonResultList = PokemonResultListTemplate.gimmeAValid2();
-        pokemonDetail = PokemonDeatilTemplate.gimmeAValid();
-
-        Mockito.when(pokemonGatewayMock.getPokemonNumberedList(Mockito.anyInt())).thenReturn(pokemonResultList);
-        Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonResultDetails);
-        Mockito.when(pokemonDetailMapperMock.mapperFromResultDetailsToPokemonDetail(Mockito.any())).thenReturn(pokemonDetail);
-
-        pokemonDetails = pokemonCommand.execute(Mockito.anyInt());
-    }
-
     @Nested
     @DisplayName("when method execute is called")
     class Execute {
+        @BeforeEach
+        void initData() {
+            Mockito.reset(pokemonGatewayMock, pokemonDetailMapperMock);
+            FixtureFactoryLoader.loadTemplates(TemplatesPath.TEMPLATES_PATH);
+
+            pokemonCommand = new PokemonCommand(pokemonGatewayMock, pokemonDetailMapperMock);
+            pokemonResultDetails = PokemonResultDetailsTemplate.gimmeAValid();
+            pokemonResultList = PokemonResultListTemplate.gimmeAValid2();
+            pokemonDetail = PokemonDeatilTemplate.gimmeAValid();
+
+            Mockito.when(pokemonGatewayMock.getPokemonNumberedList(Mockito.anyInt())).thenReturn(pokemonResultList);
+            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonResultDetails);
+            Mockito.when(pokemonDetailMapperMock.mapperFromResultDetailsToPokemonDetail(Mockito.any())).thenReturn(pokemonDetail);
+
+            pokemonDetails = pokemonCommand.execute(Mockito.anyInt());
+        }
+
         @DisplayName("then should return a List<PokemonDetail> obj")
         @Test
         void execute() {
@@ -67,19 +68,19 @@ class PokemonCommandTest {
         @DisplayName("then should call  method getPokemonNumberedList")
         @Test
         void verifyGatewayGetPokemonNumberedList() {
-            Mockito.verify(pokemonGatewayMock, Mockito.atLeast(1)).getPokemonNumberedList(Mockito.anyInt());
+            Mockito.verify(pokemonGatewayMock, Mockito.atMostOnce()).getPokemonNumberedList(Mockito.anyInt());
         }
 
         @DisplayName("then should call method getPokemonById")
         @Test
         void verifyGatewayGetPokemonById() {
-            Mockito.verify(pokemonGatewayMock, Mockito.atLeast(2)).getPokemonById(Mockito.anyInt());
+            Mockito.verify(pokemonGatewayMock, Mockito.atMost(2)).getPokemonById(Mockito.anyInt());
         }
 
         @DisplayName("then should call method mapperFromResultDetailsToPokemonDetail")
         @Test
         void verifyMapperFromResultDetailsToPokemonDetail() {
-            Mockito.verify(pokemonDetailMapperMock, Mockito.atLeast(2)).mapperFromResultDetailsToPokemonDetail(Mockito.any());
+            Mockito.verify(pokemonDetailMapperMock, Mockito.atMost(2)).mapperFromResultDetailsToPokemonDetail(Mockito.any());
         }
     }
 

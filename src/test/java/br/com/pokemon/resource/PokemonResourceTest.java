@@ -33,24 +33,25 @@ class PokemonResourceTest {
     List<PokemonDetail> pokemonDetails;
     List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses;
 
-    @BeforeEach
-    void initData() {
-        FixtureFactoryLoader.loadTemplates(TemplatesPath.TEMPLATES_PATH);
-
-        pokemonResource = new PokemonResource(pokemonCommandMock, pokemonDetailSimpleResponseMapperMock);
-        pokemonDetails = PokemonDeatilTemplate.gimmeAValidList();
-        pokemonDetailSimpleResponses = PokemonDetailSimpleResponseTemplate.gimmeAValidList();
-
-        Mockito.when(pokemonCommandMock.execute(Mockito.anyInt())).thenReturn(pokemonDetails);
-        Mockito.when(pokemonDetailSimpleResponseMapperMock.mapperFromDetailResponseToDetailSimpleResponse(Mockito.anyList()))
-                .thenReturn(pokemonDetailSimpleResponses);
-
-        pokemonResource.pokemonList(Mockito.anyInt());
-    }
-
     @Nested
     @DisplayName("when method pokemonList is called")
     class PokemonResourceTests {
+        @BeforeEach
+        void initData() {
+            Mockito.reset(pokemonCommandMock, pokemonDetailSimpleResponseMapperMock);
+            FixtureFactoryLoader.loadTemplates(TemplatesPath.TEMPLATES_PATH);
+
+            pokemonResource = new PokemonResource(pokemonCommandMock, pokemonDetailSimpleResponseMapperMock);
+            pokemonDetails = PokemonDeatilTemplate.gimmeAValidList();
+            pokemonDetailSimpleResponses = PokemonDetailSimpleResponseTemplate.gimmeAValidList();
+
+            Mockito.when(pokemonCommandMock.execute(Mockito.anyInt())).thenReturn(pokemonDetails);
+            Mockito.when(pokemonDetailSimpleResponseMapperMock.mapperFromDetailResponseToDetailSimpleResponse(Mockito.anyList()))
+                    .thenReturn(pokemonDetailSimpleResponses);
+
+            pokemonResource.pokemonList(Mockito.anyInt());
+        }
+
         @DisplayName("then should return a List<PokemonDetailSimpleResponse> obj")
         @Test
         void pokemonList() {
@@ -62,13 +63,13 @@ class PokemonResourceTest {
         @DisplayName("then should call method execute")
         @Test
         void verifyCommandExecute() {
-            Mockito.verify(pokemonCommandMock, Mockito.atLeast(1)).execute(Mockito.anyInt());
+            Mockito.verify(pokemonCommandMock, Mockito.atMostOnce()).execute(Mockito.anyInt());
         }
 
         @DisplayName("then should call method mapperFromDetailResponseToDetailSimpleResponse")
         @Test
         void verifyMapperFromDetailResponseToDetailSimpleResponse() {
-            Mockito.verify(pokemonDetailSimpleResponseMapperMock, Mockito.atLeast(1))
+            Mockito.verify(pokemonDetailSimpleResponseMapperMock, Mockito.atMostOnce())
                     .mapperFromDetailResponseToDetailSimpleResponse(Mockito.anyList());
         }
     }
