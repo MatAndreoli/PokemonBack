@@ -3,7 +3,7 @@ package br.com.pokemon.command.mapper;
 import br.com.pokemon.domain.PokemonDetail;
 import br.com.pokemon.infrastructure.domain.PokemonResultDetails;
 import br.com.pokemon.templates.TemplatesPath;
-import br.com.pokemon.templates.pokemondetail.PokemonDeatilTemplate;
+import br.com.pokemon.templates.pokemondetail.PokemonDetailTemplate;
 import br.com.pokemon.templates.pokemonresultdetails.PokemonResultDetailsTemplate;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import org.junit.jupiter.api.*;
@@ -32,7 +32,7 @@ class PokemonDetailMapperTest {
         @Test
         void assetEqualsMapperFromResultDetailsToPokemonDetail() {
             PokemonResultDetails pokemonResultDetails = PokemonResultDetailsTemplate.gimmeAValid();
-            PokemonDetail pokemonDetailTemp = PokemonDeatilTemplate.gimmeAValid();
+            PokemonDetail pokemonDetailTemp = PokemonDetailTemplate.gimmeAValid();
             PokemonDetail pokemonDetail = pokemonDetailMapper.mapperFromResultDetailsToPokemonDetail(pokemonResultDetails);
 
             assertEquals(pokemonDetail.toString(), pokemonDetailTemp.toString());

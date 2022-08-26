@@ -6,82 +6,88 @@ import br.com.pokemon.infrastructure.domain.PokemonResultDetails;
 import br.com.pokemon.infrastructure.domain.PokemonResultList;
 import br.com.pokemon.infrastructure.gateway.PokemonGateway;
 import br.com.pokemon.templates.TemplatesPath;
-import br.com.pokemon.templates.pokemondetail.PokemonDeatilTemplate;
+import br.com.pokemon.templates.pokemondetail.PokemonDetailTemplate;
 import br.com.pokemon.templates.pokemonresult.PokemonResultListTemplate;
 import br.com.pokemon.templates.pokemonresultdetails.PokemonResultDetailsTemplate;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
+import org.mockito.Captor;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
 class PokemonCommandTest {
-
-    PokemonCommand pokemonCommand;
-
     @Mock
     PokemonGateway pokemonGatewayMock;
-
     @Mock
     PokemonDetailMapper pokemonDetailMapperMock;
+    @InjectMocks
+    PokemonCommand pokemonCommand;
 
     PokemonResultDetails pokemonResultDetails;
     PokemonResultList pokemonResultList;
     PokemonDetail pokemonDetail;
     List<PokemonDetail> pokemonDetails;
+    @Captor
+    ArgumentCaptor<Integer> pokemonIdCaptor;
+
+    @BeforeAll
+    static void init() {
+        FixtureFactoryLoader.loadTemplates(TemplatesPath.TEMPLATES_PATH);
+    }
 
     @Nested
     @DisplayName("when method execute is called")
     class Execute {
         @BeforeEach
         void initData() {
-            Mockito.reset(pokemonGatewayMock, pokemonDetailMapperMock);
-            FixtureFactoryLoader.loadTemplates(TemplatesPath.TEMPLATES_PATH);
-
-            pokemonCommand = new PokemonCommand(pokemonGatewayMock, pokemonDetailMapperMock);
-            pokemonResultDetails = PokemonResultDetailsTemplate.gimmeAValid();
+            reset(pokemonGatewayMock, pokemonDetailMapperMock);
             pokemonResultList = PokemonResultListTemplate.gimmeAValid2();
-            pokemonDetail = PokemonDeatilTemplate.gimmeAValid();
+            pokemonResultDetails = PokemonResultDetailsTemplate.gimmeAValid();
+            pokemonDetail = PokemonDetailTemplate.gimmeAValid();
 
-            Mockito.when(pokemonGatewayMock.getPokemonNumberedList(Mockito.anyInt())).thenReturn(pokemonResultList);
-            Mockito.when(pokemonGatewayMock.getPokemonById(Mockito.anyInt())).thenReturn(pokemonResultDetails);
-            Mockito.when(pokemonDetailMapperMock.mapperFromResultDetailsToPokemonDetail(Mockito.any())).thenReturn(pokemonDetail);
+            when(pokemonGatewayMock.getPokemonNumberedList(anyInt())).thenReturn(pokemonResultList);
+            when(pokemonGatewayMock.getPokemonById(anyInt())).thenReturn(pokemonResultDetails);
+            when(pokemonDetailMapperMock.mapperFromResultDetailsToPokemonDetail(any())).thenReturn(pokemonDetail);
 
-            pokemonDetails = pokemonCommand.execute(Mockito.anyInt());
+            pokemonDetails = pokemonCommand.execute(anyInt());
+            verify(pokemonGatewayMock, atLeast(1)).getPokemonById(pokemonIdCaptor.capture());
         }
 
-        @DisplayName("then should return a List<PokemonDetail> obj")
         @Test
+        @DisplayName("Then return a PokemonDetails list")
         void execute() {
-            List<PokemonDetail> pokemonDetailResponseList = PokemonDeatilTemplate.gimmeAValidList();
-
-            assertEquals(pokemonDetailResponseList.size(), pokemonDetails.size());
+            assertThat(pokemonDetails).hasSize(2);
         }
 
-        @DisplayName("then should call  method getPokemonNumberedList")
         @Test
+        @DisplayName("Then call getPokemonNumberedList")
         void verifyGatewayGetPokemonNumberedList() {
-            Mockito.verify(pokemonGatewayMock, Mockito.atMostOnce()).getPokemonNumberedList(Mockito.anyInt());
+            verify(pokemonGatewayMock, atMostOnce()).getPokemonNumberedList(anyInt());
         }
 
-        @DisplayName("then should call method getPokemonById")
         @Test
+        @DisplayName("Then call getPokemonById with pokemon id")
         void verifyGatewayGetPokemonById() {
-            Mockito.verify(pokemonGatewayMock, Mockito.atMost(2)).getPokemonById(Mockito.anyInt());
+            assertThat(pokemonIdCaptor.getValue())
+                    .isEqualTo(1);
         }
 
-        @DisplayName("then should call method mapperFromResultDetailsToPokemonDetail")
         @Test
+        @DisplayName("Then call mapperFromResultDetailsToPokemonDetail")
         void verifyMapperFromResultDetailsToPokemonDetail() {
-            Mockito.verify(pokemonDetailMapperMock, Mockito.atMost(2)).mapperFromResultDetailsToPokemonDetail(Mockito.any());
+            verify(pokemonDetailMapperMock, atMost(2)).mapperFromResultDetailsToPokemonDetail(any());
         }
     }
-
 }

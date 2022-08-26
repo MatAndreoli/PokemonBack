@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 
 @ApplicationScoped
 public class PokemonCommand {
-
     private final PokemonGateway pokemonListGateway;
     private final PokemonDetailMapper pokemonDetailMapper;
 
@@ -26,14 +25,14 @@ public class PokemonCommand {
     }
 
     public List<PokemonDetail> execute(Integer limit) {
-        PokemonResultList pokemonResultList = this.pokemonListGateway.getPokemonNumberedList(limit);
+        PokemonResultList pokemonResultList = pokemonListGateway.getPokemonNumberedList(limit);
 
         return pokemonResultList.getResults().stream()
                 .parallel()
                 .map(PokemonResult::getUrl)
                 .map(PokemonCommand::getPokemonIndex)
-                .map(this.pokemonListGateway::getPokemonById)
-                .map(this.pokemonDetailMapper::mapperFromResultDetailsToPokemonDetail)
+                .map(pokemonListGateway::getPokemonById)
+                .map(pokemonDetailMapper::mapperFromResultDetailsToPokemonDetail)
                 .collect(Collectors.toList());
     }
 
@@ -41,5 +40,4 @@ public class PokemonCommand {
         List<String> urlSplit = Arrays.asList(url.split("/"));
         return Integer.parseInt(urlSplit.get(urlSplit.size() - 1));
     }
-
 }

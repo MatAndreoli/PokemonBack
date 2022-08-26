@@ -2,75 +2,96 @@ package br.com.pokemon.resource;
 
 import br.com.pokemon.command.PokemonCommand;
 import br.com.pokemon.domain.PokemonDetail;
-import br.com.pokemon.resource.entities.PokemonDetailSimpleResponse;
-import br.com.pokemon.resource.mapper.PokemonDetailSimpleResponseMapper;
 import br.com.pokemon.templates.TemplatesPath;
-import br.com.pokemon.templates.pokemondetail.PokemonDeatilTemplate;
-import br.com.pokemon.templates.pokemondetailsimpleresponse.PokemonDetailSimpleResponseTemplate;
+import br.com.pokemon.templates.pokemondetail.PokemonDetailTemplate;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.ws.rs.core.Response;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
 class PokemonResourceTest {
-
-    PokemonResource pokemonResource;
-
     @Mock
     PokemonCommand pokemonCommandMock;
+    @InjectMocks
+    PokemonResource pokemonResource;
+    List<PokemonDetail> pokemonDetails, pokemonDetailsResult;
+    Response result;
 
-    @Mock
-    PokemonDetailSimpleResponseMapper pokemonDetailSimpleResponseMapperMock;
-
-    List<PokemonDetail> pokemonDetails;
-    List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses;
+    @BeforeAll
+    static void init() {
+        FixtureFactoryLoader.loadTemplates(TemplatesPath.TEMPLATES_PATH);
+    }
 
     @Nested
-    @DisplayName("when method pokemonList is called")
-    class PokemonResourceTests {
-        @BeforeEach
-        void initData() {
-            Mockito.reset(pokemonCommandMock, pokemonDetailSimpleResponseMapperMock);
-            FixtureFactoryLoader.loadTemplates(TemplatesPath.TEMPLATES_PATH);
+    @DisplayName("Given PokemonResource is started")
+    class GivenPokemonResource {
+        @Nested
+        @DisplayName("When pokemonList is called")
+        class PokemonResourceTests {
+            @BeforeEach
+            void mock() {
+                reset(pokemonCommandMock);
+            }
 
-            pokemonResource = new PokemonResource(pokemonCommandMock, pokemonDetailSimpleResponseMapperMock);
-            pokemonDetails = PokemonDeatilTemplate.gimmeAValidList();
-            pokemonDetailSimpleResponses = PokemonDetailSimpleResponseTemplate.gimmeAValidList();
+            @Nested
+            @DisplayName("And succeeds")
+            class AndSucceeds {
+                @BeforeEach
+                void initData() {
+                    pokemonDetails = PokemonDetailTemplate.gimmeAValidList();
+                    when(pokemonCommandMock.execute(anyInt())).thenReturn(pokemonDetails);
+                    pokemonDetailsResult = (List<PokemonDetail>) pokemonResource.pokemonList(anyInt()).getEntity();
+                }
 
-            Mockito.when(pokemonCommandMock.execute(Mockito.anyInt())).thenReturn(pokemonDetails);
-            Mockito.when(pokemonDetailSimpleResponseMapperMock.mapperFromDetailResponseToDetailSimpleResponse(Mockito.anyList()))
-                    .thenReturn(pokemonDetailSimpleResponses);
+                @DisplayName("Then return a pokemon list")
+                @Test
+                void pokemonList() {
+                    assertThat(pokemonDetailsResult)
+                            .hasSize(2)
+                            .extracting("name", "abilities")
+                            .containsExactly(
+                                    tuple("charmander", Arrays.asList("fire ball", "fire ball")),
+                                    tuple("charmander", Arrays.asList("fire ball", "fire ball"))
+                            );
+                }
 
-            pokemonResource.pokemonList(Mockito.anyInt());
-        }
+                @DisplayName("Then call pokemonCommand.execute")
+                @Test
+                void verifyCommandExecute() {
+                    verify(pokemonCommandMock, atMostOnce()).execute(anyInt());
+                }
+            }
 
-        @DisplayName("then should return a List<PokemonDetailSimpleResponse> obj")
-        @Test
-        void pokemonList() {
-            List<PokemonDetailSimpleResponse> pokemonDetailSimpleResponses1 = pokemonResource.pokemonList(Mockito.anyInt());
+            @Nested
+            @DisplayName("And fails")
+            class AndFails {
+                @BeforeEach
+                void initData() {
+                    when(pokemonCommandMock.execute(anyInt())).thenThrow(new RuntimeException("An error occurred"));
+                    result = pokemonResource.pokemonList(anyInt());
+                }
 
-            assertEquals(pokemonDetailSimpleResponses.toString(), pokemonDetailSimpleResponses1.toString());
-        }
-
-        @DisplayName("then should call method execute")
-        @Test
-        void verifyCommandExecute() {
-            Mockito.verify(pokemonCommandMock, Mockito.atMostOnce()).execute(Mockito.anyInt());
-        }
-
-        @DisplayName("then should call method mapperFromDetailResponseToDetailSimpleResponse")
-        @Test
-        void verifyMapperFromDetailResponseToDetailSimpleResponse() {
-            Mockito.verify(pokemonDetailSimpleResponseMapperMock, Mockito.atMostOnce())
-                    .mapperFromDetailResponseToDetailSimpleResponse(Mockito.anyList());
+                @DisplayName("Then return a error Response")
+                @Test
+                void pokemonList() {
+                    assertThat(result)
+                            .extracting("status")
+                            .isEqualTo(500);
+                }
+            }
         }
     }
 }
