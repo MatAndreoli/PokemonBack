@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-
+.idea
 # Log file
 *.log
 
@@ -12,7 +12,7 @@
 surefire-reports/
 quarkus/
 httpRequests/
-
+target/
 # Package Files #
 *.jar
 *.war
