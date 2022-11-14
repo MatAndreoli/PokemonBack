@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Building.. ${TAG}"
+                echo "Building..."
                 sh '''
                 mvn clean install -DskipTests
                 '''
@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo "Testing.."
+                echo "Testing..."
                 sh '''
                 mvn test
                 '''
@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Mutation') {
             steps {
-                echo "Mutating.."
+                echo "Mutating..."
                 sh '''
                 mvn org.pitest:pitest-maven:mutationCoverage
                 '''
@@ -37,10 +37,9 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                echo 'Deliver....'
-                sh '''
-                echo "doing delivery stuff.."
-                '''
+                script {
+                    docker.build("matandreoli/pokemon-api:${TAG}")
+                }
             }
         }
     }
