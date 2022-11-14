@@ -8,7 +8,7 @@ pipeline {
         TAG = "${DATE}.${BUILD_NUMBER}"
     }
     triggers {
-        pollSCM 'H/5 * * * *'
+        pollSCM 'H * * * *'
     }
     stages {
         stage('Build') {
