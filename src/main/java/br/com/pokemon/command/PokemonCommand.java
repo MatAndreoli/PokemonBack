@@ -12,11 +12,14 @@ import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.logging.Logger;
 
 @ApplicationScoped
 public class PokemonCommand {
     private final PokemonGateway pokemonListGateway;
     private final PokemonDetailMapper pokemonDetailMapper;
+
+    Logger LOGGER = Logger.getLogger(PokemonCommand.class.getName());
 
     @Inject
     public PokemonCommand(@RestClient PokemonGateway pokemonListGateway, PokemonDetailMapper pokemonDetailMapper) {
@@ -25,6 +28,7 @@ public class PokemonCommand {
     }
 
     public List<PokemonDetail> execute(Integer limit) {
+        LOGGER.info(String.format("[PokemonCommand:execute] Calling pokeapi.co with limit of: %s", limit));
         PokemonResultList pokemonResultList = pokemonListGateway.getPokemonNumberedList(limit);
 
         return pokemonResultList.getResults().stream()

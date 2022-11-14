@@ -10,11 +10,16 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import java.util.logging.Logger;
+
 import java.util.List;
 
 @Path("pokemons")
 public class PokemonResource {
     private final PokemonCommand pokemonCommand;
+
+    Logger LOGGER = Logger.getLogger(PokemonResource.class.getName());
 
     @Inject
     public PokemonResource(PokemonCommand pokemonCommand) {
@@ -26,9 +31,10 @@ public class PokemonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response pokemonList(@PathParam("limit") Integer limit) {
         try {
+            LOGGER.info(String.format("[PokemonResource:pokemonList] Getting pokemon list with limit of: %s", limit));
             List<PokemonDetail> pokemonDetails = pokemonCommand.execute(limit);
             return Response.ok(pokemonDetails).build();
-        } catch (final Exception e){
+        } catch (final Exception e) {
             return Response.serverError().build();
         }
     }
