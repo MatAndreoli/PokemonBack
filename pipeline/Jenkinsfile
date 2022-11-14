@@ -37,9 +37,10 @@ pipeline {
         }
         stage('Deliver') {
             steps {
-                script {
-                    docker.build("matandreoli/pokemon-api:${TAG}")
-                }
+                sh'''
+                env | grep DOCKER_
+                docker build -f src/main/docker/Dockerfile.jvm -t api-test:${TAG} .
+                '''
             }
         }
     }
