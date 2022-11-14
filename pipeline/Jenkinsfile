@@ -1,0 +1,44 @@
+pipeline {
+    agent { 
+        node {
+            label 'docker-agent-alpine'
+        }
+    }
+    triggers {
+        pollSCM 'H/5 * * * *'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo "Building.."
+                sh '''
+                mvn clean install -DskipTests
+                '''
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Testing.."
+                sh '''
+                mvn test
+                '''
+            }
+        }
+        stage('Mutation') {
+            steps {
+                echo "Mutating.."
+                sh '''
+                mvn org.pitest:pitest-maven:mutationCoverage
+                '''
+            }
+        }
+        stage('Deliver') {
+            steps {
+                echo 'Deliver....'
+                sh '''
+                echo "doing delivery stuff.."
+                '''
+            }
+        }
+    }
+}
