@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        node {
-            label 'docker-agent-alpine'
-        }
-    }
+    agent none
     tools {
         maven 'Maven363' 
     }
@@ -40,6 +36,7 @@ pipeline {
             }
         }
         stage('Deliver') {
+            agent { docker 'gustavoapolinario/jenkins-docker' }
             steps {
                 sh'''
                 env | grep DOCKER_
