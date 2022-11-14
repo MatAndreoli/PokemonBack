@@ -1,8 +1,11 @@
 pipeline {
-    agent { 
-        node {
-            label 'docker-agent-mvn'
-        }
+    agent any
+    tools {
+        maven 'maven-3.6.3' 
+    }
+    environment {
+        DATE = new Date().format('yy.M')
+        TAG = "${DATE}.${BUILD_NUMBER}"
     }
     triggers {
         pollSCM 'H/5 * * * *'
@@ -10,7 +13,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Building.."
+                echo "Building.. ${TAG}"
                 sh '''
                 mvn clean install -DskipTests
                 '''
