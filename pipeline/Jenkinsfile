@@ -40,6 +40,8 @@ pipeline {
             steps {
                 sh'''
                 service docker status
+                service docker start
+                service docker status
                 '''
             }
         }
