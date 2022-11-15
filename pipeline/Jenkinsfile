@@ -39,8 +39,7 @@ pipeline {
             agent { docker 'gustavoapolinario/jenkins-docker' }
             steps {
                 sh'''
-                env | grep DOCKER_
-                docker version
+                docker images
                 '''
             }
         }
