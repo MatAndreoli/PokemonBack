@@ -36,7 +36,6 @@ pipeline {
             }
         }
         stage('Deliver') {
-            agent { docker 'gustavoapolinario/jenkins-docker' }
             steps {
                 sh'''
                 env | grep DOCKER_
