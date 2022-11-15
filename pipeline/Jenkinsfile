@@ -38,6 +38,7 @@ pipeline {
         stage('Deliver') {
             steps {
                 sh'''
+                ls -a src/main
                 docker ps -a
                 '''
             }
