@@ -39,8 +39,7 @@ pipeline {
             agent { docker 'gustavoapolinario/jenkins-docker' }
             steps {
                 sh'''
-                sudo service docker start
-                sudo service docker status
+                docker ps -a
                 '''
             }
         }
