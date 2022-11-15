@@ -6,6 +6,7 @@ pipeline {
     environment {
         DATE = new Date().format('yy.M')
         TAG = "${DATE}.${BUILD_NUMBER}"
+        DOCKERFILE_PATH = "src/main/docker"
     }
     triggers {
         pollSCM 'H * * * *'
@@ -38,7 +39,7 @@ pipeline {
         stage('Deliver') {
             steps {
                 sh'''
-                ls -a src/main
+                docker build -f $DOCKERFILE_PATH/Dockerfile.jvm -t pokemon-api .
                 docker ps -a
                 '''
             }
