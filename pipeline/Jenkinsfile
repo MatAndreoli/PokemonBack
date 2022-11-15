@@ -39,7 +39,7 @@ pipeline {
             agent { docker 'gustavoapolinario/jenkins-docker' }
             steps {
                 sh'''
-                docker images
+                service docker status
                 '''
             }
         }
