@@ -40,7 +40,8 @@ pipeline {
             steps {
                 echo "Updating app version..."
                 sh '''
-                python3 --version
+                python3 update_version.py
+                cat pom.xml
                 '''
             }
         }
@@ -49,6 +50,7 @@ pipeline {
                 sh'''
                 docker build -f $DOCKERFILE_PATH/Dockerfile.jvm -t pokemon-api .
                 docker ps -a
+                docker rmi pokemon-api
                 '''
             }
         }
