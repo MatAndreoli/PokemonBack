@@ -11,6 +11,7 @@ pipeline {
     stages {
         stage('Update Version') {
             steps {
+                withCredentials([usernamePassword(credentialsId: 'GitHubCreds']) {
                 echo "Updating app version..."
                 sh '''
                 git remote set-url origin https://github.com/MatAndreoli/PokemonBack.git
@@ -19,7 +20,7 @@ pipeline {
                 git commit -m 'Jenkins Update Version'
                 git push origin Main
                 '''
-                gitPublisher branchesToPush: [[branchName: 'Main']], credentialsId: 'GitHubCreds', url: 'https://github.com/MatAndreoli/PokemonBack.git'
+                }
             }
         }
     }
