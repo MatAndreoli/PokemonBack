@@ -19,9 +19,7 @@ pipeline {
                 git commit -m 'Jenkins Update Version'
                 git push origin Main
                 '''
-                withCredentials([usernamePassword(credentialsId: 'GitHubCreds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    sh('git push origin HEAD:Main')
-                }
+                gitPublisher branchesToPush: [[branchName: 'Main']], credentialsId: 'GitHubCreds', url: 'https://github.com/MatAndreoli/PokemonBack.git'
             }
         }
     }
