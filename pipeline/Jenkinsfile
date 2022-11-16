@@ -41,6 +41,9 @@ pipeline {
                 echo "Updating app version..."
                 sh '''
                 python3 update_version.py
+                git add .
+                git commit -m 'Jenkins Update Version"
+                git push -u origin Main
                 cat pom.xml
                 '''
             }
