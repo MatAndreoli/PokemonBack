@@ -43,9 +43,6 @@ pipeline {
                 git commit -m 'Jenkins Update Version'
                 git push
                 '''
-                withCredentials([usernamePassword(credentialsId: 'GitHubCreds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/MatAndreoli/PokemonBack.git Main')
-                }
             }
         }
         stage('Deliver') {
