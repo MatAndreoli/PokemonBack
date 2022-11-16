@@ -11,6 +11,9 @@ pipeline {
     stages {
         stage('Update Version') {
             steps {
+                environment {
+                    GIT_AUTH = credentials('support-team-up')
+                }
                 echo "Updating app version..."
                 sh '''
                 echo $TARGET_BRANCH
@@ -19,6 +22,10 @@ pipeline {
                 git add .
                 git commit -m 'Jenkins Update Version'
                 git push origin HEAD:Main
+                '''
+                sh'''
+                    git config --local credential.helper "!f() { echo username=\\$GIT_AUTH_USR; echo password=\\$GIT_AUTH_PSW; }; f"
+                    git push origin HEAD:$TARGET_BRANCH
                 '''
             }
         }
