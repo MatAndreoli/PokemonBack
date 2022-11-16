@@ -8,9 +8,6 @@ pipeline {
         TAG = "${DATE}.${BUILD_NUMBER}"
         DOCKERFILE_PATH = "src/main/docker"
     }
-    triggers {
-        pollSCM 'H * * * *'
-    }
     stages {
         stage('Build') {
             steps {
@@ -47,7 +44,7 @@ pipeline {
                 git push
                 '''
                 withCredentials([usernamePassword(credentialsId: 'GitHubCreds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                        sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/MatAndreoli/PokemonBack.git')
+                        sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/MatAndreoli/PokemonBack.git Main')
                 }
             }
         }
