@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Update Version') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'GitHubCreds']) {
+                withCredentials([usernamePassword(credentialsId: 'GitHubCreds')]) {
                 echo "Updating app version..."
                 sh '''
                 git clone https://github.com/MatAndreoli/PokemonBack.git
