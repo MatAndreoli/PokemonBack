@@ -42,9 +42,8 @@ pipeline {
                 sh '''
                 python3 update_version.py
                 git add .
-                git commit -m 'Jenkins Update Version"
+                git commit -m 'Jenkins Update Version'
                 git push -u origin Main
-                cat pom.xml
                 '''
             }
         }
