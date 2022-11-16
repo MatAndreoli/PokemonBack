@@ -36,6 +36,14 @@ pipeline {
                 '''
             }
         }
+        stage('Update Version') {
+            steps {
+                echo "Updating app version..."
+                sh '''
+                python3 --version
+                '''
+            }
+        }
         stage('Deliver') {
             steps {
                 sh'''
