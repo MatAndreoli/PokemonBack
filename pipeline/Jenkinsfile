@@ -38,15 +38,16 @@ pipeline {
         }
         stage('Update Version') {
             steps {
-                withCredentials([gitUsernamePassword(credentialsId: 'GitHubCreds', gitToolName: 'Default')]) {
-                    echo "Updating app version..."
-                    sh '''
-                    git checkout Main
-                    python3 update_version.py
-                    git add .
-                    git commit -m 'Jenkins Update Version'
-                    git push
-                    '''
+                echo "Updating app version..."
+                sh '''
+                git checkout Main
+                python3 update_version.py
+                git add .
+                git commit -m 'Jenkins Update Version'
+                git push
+                '''
+                withCredentials([usernamePassword(credentialsId: 'GitHubCreds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/MatAndreoli/PokemonBack.git')
                 }
             }
         }
