@@ -7,7 +7,6 @@ pipeline {
         DATE = new Date().format('yy.M')
         TAG = "${DATE}.${BUILD_NUMBER}"
         DOCKERFILE_PATH = "src/main/docker"
-        CREDS = credentials("GitHubCreds")
     }
     triggers {
         pollSCM 'H * * * *'
@@ -17,8 +16,46 @@ pipeline {
             steps {
                 echo "Building..."
                 sh '''
-                echo $CREDS_USR
-                echo $CREDS_PSW
+                mvn clean install -DskipTests
+                '''
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Testing..."
+                sh '''
+                mvn test
+                '''
+            }
+        }
+        stage('Mutation') {
+            steps {
+                echo "Mutating..."
+                sh '''
+                mvn org.pitest:pitest-maven:mutationCoverage
+                '''
+            }
+        }
+        stage('Update Version') {
+            steps {
+                withCredentials([gitUsernamePassword(credentialsId: 'GitHubCreds', gitToolName: 'Default')]) {
+                    echo "Updating app version..."
+                    sh '''
+                    git checkout Main
+                    python3 update_version.py
+                    git add .
+                    git commit -m 'Jenkins Update Version'
+                    git push
+                    '''
+                }
+            }
+        }
+        stage('Deliver') {
+            steps {
+                sh'''
+                docker build -f $DOCKERFILE_PATH/Dockerfile.jvm -t pokemon-api .
+                docker ps -a
+                docker rmi pokemon-api
                 '''
             }
         }
