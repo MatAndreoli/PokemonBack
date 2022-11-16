@@ -14,7 +14,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'GitHubCreds']) {
                 echo "Updating app version..."
                 sh '''
-                git remote set-url origin https://github.com/MatAndreoli/PokemonBack.git
+                git clone https://github.com/MatAndreoli/PokemonBack.git
                 python3 update_version.py
                 git add .
                 git commit -m 'Jenkins Update Version'
