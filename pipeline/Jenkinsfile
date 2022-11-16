@@ -13,7 +13,7 @@ pipeline {
             steps {
                 echo "Updating app version..."
                 sh '''
-                git checkout Main
+                git branch
                 python3 update_version.py
                 git add .
                 git commit -m 'Jenkins Update Version'
