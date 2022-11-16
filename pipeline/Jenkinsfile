@@ -13,6 +13,7 @@ pipeline {
             steps {
                 echo "Updating app version..."
                 sh '''
+                echo $TARGET_BRANCH
                 git branch
                 python3 update_version.py
                 git add .
