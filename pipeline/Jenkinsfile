@@ -13,12 +13,11 @@ pipeline {
             steps {
                 echo "Updating app version..."
                 sh '''
-                echo $TARGET_BRANCH
-                git branch
+                git remote set-url origin https://github.com/MatAndreoli/PokemonBack.git
                 python3 update_version.py
                 git add .
                 git commit -m 'Jenkins Update Version'
-                git push origin HEAD:Main
+                git push origin Main
                 '''
                 withCredentials([usernamePassword(credentialsId: 'GitHubCreds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh('git push origin HEAD:Main')
