@@ -12,7 +12,7 @@ pipeline {
         stage('Update Version') {
             steps {
                 environment {
-                    GIT_AUTH = credentials('support-team-up')
+                    GIT_AUTH = credentials('GitHubCreds')
                 }
                 echo "Updating app version..."
                 sh '''
