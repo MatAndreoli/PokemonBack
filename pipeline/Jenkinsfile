@@ -11,7 +11,6 @@ pipeline {
     stages {
         stage('Update Version') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'GitHubCreds')]) {
                 echo "Updating app version..."
                 sh '''
                 git config --global user.name "Jenkins Pipeline"
@@ -22,7 +21,6 @@ pipeline {
                 git commit -m 'Jenkins Update Version'
                 git push origin Main
                 '''
-                }
             }
         }
     }
