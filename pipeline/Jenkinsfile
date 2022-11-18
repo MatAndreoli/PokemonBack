@@ -12,16 +12,27 @@ pipeline {
         stage('Update Version') {
             steps {
                 cleanWs()
-                git branch: 'Main', url: 'https://github.com/MatAndreoli/PokemonBack'
                 echo "Updating app version..."
+                sh 'git config credential.helper cache'
+                sh 'git config push.default simple'
+                checkout([
+                    $class: 'GitSCM', 
+                    branches: [[name: '*/Main']], 
+                    extensions: [], 
+                    userRemoteConfigs: [[
+                        credentialsId: 'GitHubCreds', 
+                        url: 'https://github.com/MatAndreoli/PokemonBack'
+                    ]]]
+                )
+                sh "git checkout Main" //To get a local branch tracking remote
                 sh '''
                 git config user.name "Jenkins Pipeline"
                 git config user.email "jenkins@jenkins.com"
                 python3 update_version.py
                 git add .
                 git commit -m 'Jenkins Update Version'
+                git push
                 '''
-                gitPush()
             }
         }
     }
