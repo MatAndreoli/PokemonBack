@@ -13,8 +13,6 @@ pipeline {
             steps {
                 cleanWs()
                 echo "Updating app version..."
-                sh 'git config credential.helper cache'
-                sh 'git config push.default simple'
                 checkout([
                     $class: 'GitSCM', 
                     branches: [[name: '*/Main']], 
