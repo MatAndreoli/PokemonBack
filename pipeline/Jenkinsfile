@@ -15,8 +15,8 @@ pipeline {
                 git branch: 'Main', url: 'https://github.com/MatAndreoli/PokemonBack'
                 echo "Updating app version..."
                 sh '''
-                git config --global user.name "Jenkins Pipeline"
-                git config --global user.email "jenkins@jenkins.com"
+                git config user.name "Jenkins Pipeline"
+                git config user.email "jenkins@jenkins.com"
                 python3 update_version.py
                 git add .
                 git commit -m 'Jenkins Update Version'
