@@ -14,6 +14,8 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'GitHubCreds')]) {
                 echo "Updating app version..."
                 sh '''
+                git config --global user.name "Jenkins Pipeline"
+                git config --global user.email "jenkins@jenkins.com"
                 git clone https://github.com/MatAndreoli/PokemonBack.git
                 python3 update_version.py
                 git add .
