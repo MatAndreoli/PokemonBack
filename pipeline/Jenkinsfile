@@ -14,6 +14,7 @@ pipeline {
                 cleanWs()
                 echo "Updating app version..."
                 sh '''
+                ls -a
                 git config --global user.name "Jenkins Pipeline"
                 git config --global user.email "jenkins@jenkins.com"
                 python3 update_version.py
