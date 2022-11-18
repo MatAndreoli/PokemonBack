@@ -27,7 +27,25 @@ pipeline {
                 python3 update_version.py
                 git add .
                 git commit -m 'Jenkins Update Version'
-                git push -u origin Main
+                '''
+            }
+        }
+        stage('Deliver') {
+            steps {
+                sh'''
+                mvn clean install -DskipTests
+                python3 get_last_docker_img.py
+                export $(grep -v '^#' .env | xargs)
+                
+                LOCAL_IMG=pokemon-api
+                TAG_IMG=matandreoli/pokemon-api:$NEXT_VERSION
+                IMG=matandreoli/pokemon-api:latest
+
+                docker build -f $DOCKERFILE_PATH/Dockerfile.jvm -t $LOCAL_IMG .
+                echo $TAG_IMG
+                docker images
+
+                docker rmi pokemon-api
                 '''
             }
         }
