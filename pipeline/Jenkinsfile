@@ -20,7 +20,13 @@ pipeline {
                 IMG=matandreoli/pokemon-api:latest
 
                 docker build -f $DOCKERFILE_PATH/Dockerfile.jvm -t $LOCAL_IMG .
-                echo $TAG_IMG
+
+                docker tag LOCAL_IMG $TAG_IMG
+                docker tag LOCAL_IMG $IMG
+
+                docker push $TAG_IMG
+                docker push $IMG
+
                 docker images
 
                 docker rmi pokemon-api
