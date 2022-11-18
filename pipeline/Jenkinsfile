@@ -11,6 +11,7 @@ pipeline {
     stages {
         stage('Update Version') {
             steps {
+                cleanWs()
                 echo "Updating app version..."
                 sh '''
                 git config --global user.name "Jenkins Pipeline"
@@ -20,7 +21,6 @@ pipeline {
                 git commit -m 'Jenkins Update Version'
                 git push origin Main
                 '''
-                cleanWs()
             }
         }
     }
