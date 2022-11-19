@@ -30,11 +30,9 @@ pipeline {
         }
         stage('Push Image to Docker') {
             steps{
-                scrpit{
-                    withCredentials([string(credentialsId: 'docker_hub_secret', variable: 'DOCKER_HUB_CRED')]) {
-                        sh 'docker login -u matandreoli -p ${DOCKER_HUB_CRED}'
-                        sh 'echo $TAG_IMG'
-                    }
+                withCredentials([string(credentialsId: 'docker_hub_secret', variable: 'DOCKER_HUB_CRED')]) {
+                    sh 'docker login -u matandreoli -p ${DOCKER_HUB_CRED}'
+                    sh 'echo $TAG_IMG'
                 }
             }
         }
