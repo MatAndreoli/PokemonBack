@@ -35,12 +35,14 @@ pipeline {
 
 
 void buildImageTags() {
-    sh'''
+    dir('PokemonBack') {
+        sh'''
         python3 get_last_docker_img.py
         export $(grep -v '^#' .env | xargs)
         
         LOCAL_IMG=pokemon-api
         TAG_IMG=matandreoli/pokemon-api:$NEXT_VERSION
         IMG=matandreoli/pokemon-api:latest
-    '''
+        '''
+    }
 }
