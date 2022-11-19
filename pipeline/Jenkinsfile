@@ -32,12 +32,16 @@ pipeline {
             steps{
                 withCredentials([string(credentialsId: 'docker_hub_secret', variable: 'DOCKER_HUB_CRED')]) {
                     sh'''
+                    docker login -u matandreoli -p ${DOCKER_HUB_CRED}
+
                     export $(grep -v '^#' .env | xargs)
-                    LOCAL_IMG=pokemon-api
                     TAG_IMG=matandreoli/pokemon-api:$NEXT_VERSION
                     IMG=matandreoli/pokemon-api:latest
-                    docker login -u matandreoli -p ${DOCKER_HUB_CRED}
-                    echo $TAG_IMG
+                    
+                    docker push $TAG_IMG
+                    docker push $IMG
+
+                    docker rmi $TAG_IMG
                     '''
                 }
             }
