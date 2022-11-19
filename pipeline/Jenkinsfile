@@ -11,10 +11,14 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                buildImageTags()
                 sh'''
-                env
-                echo $TAG_IMG
+                python3 get_last_docker_img.py
+                export $(grep -v '^#' .env | xargs)
+                
+                LOCAL_IMG=pokemon-api
+                TAG_IMG=matandreoli/pokemon-api:$NEXT_VERSION
+                IMG=matandreoli/pokemon-api:latest
+                
                 docker build -f $DOCKERFILE_PATH/Dockerfile.jvm -t $LOCAL_IMG .
 
                 docker tag $LOCAL_IMG $TAG_IMG
@@ -27,21 +31,16 @@ pipeline {
         stage('Push Image to Docker') {
             steps{
                 withCredentials([string(credentialsId: 'docker_hub_secret', variable: 'DOCKER_HUB_CRED')]) {
-                    sh 'docker login -u matandreoli -p ${DOCKER_HUB_CRED}'
-                    sh 'echo $TAG_IMG'
+                    sh'''
+                    export $(grep -v '^#' .env | xargs)
+                    LOCAL_IMG=pokemon-api
+                    TAG_IMG=matandreoli/pokemon-api:$NEXT_VERSION
+                    IMG=matandreoli/pokemon-api:latest
+                    docker login -u matandreoli -p ${DOCKER_HUB_CRED}
+                    echo $TAG_IMG
+                    '''
                 }
             }
         }
     }
-}
-
-void buildImageTags() {
-    sh'''
-    python3 get_last_docker_img.py
-    export $(grep -v '^#' .env | xargs)
-    
-    export LOCAL_IMG=pokemon-api
-    export TAG_IMG=matandreoli/pokemon-api:$NEXT_VERSION
-    export IMG=matandreoli/pokemon-api:latest
-    '''
 }
