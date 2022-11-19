@@ -1,4 +1,4 @@
-package br.com.pokemon.templates.pokemonresultdetails;
+package br.com.pokemon.templates.pokemonResultDetails;
 
 import br.com.pokemon.infrastructure.domain.PokemonSprites;
 import br.com.six2six.fixturefactory.Fixture;
@@ -12,7 +12,7 @@ public class SpritesTemplate implements TemplateLoader {
     @Override
     public void load() {
         Fixture.of(PokemonSprites.class).addTemplate(VALID, new Rule() {{
-            add("front_default", "localhost:image/url");
+            add("frontDefault", "localhost:image/url");
         }});
     }
 

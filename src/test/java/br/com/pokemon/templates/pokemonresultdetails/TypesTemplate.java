@@ -1,4 +1,4 @@
-package br.com.pokemon.templates.pokemonresultdetails;
+package br.com.pokemon.templates.pokemonResultDetails;
 
 import br.com.pokemon.infrastructure.domain.PokemonType;
 import br.com.pokemon.infrastructure.domain.PokemonTypes;

@@ -1,6 +1,9 @@
-package br.com.pokemon.templates.pokemonresultdetails;
+package br.com.pokemon.templates.pokemonResultDetails;
 
-import br.com.pokemon.infrastructure.domain.*;
+import br.com.pokemon.infrastructure.domain.PokemonAbilities;
+import br.com.pokemon.infrastructure.domain.PokemonResultDetails;
+import br.com.pokemon.infrastructure.domain.PokemonSprites;
+import br.com.pokemon.infrastructure.domain.PokemonTypes;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import br.com.six2six.fixturefactory.loader.TemplateLoader;
@@ -11,7 +14,7 @@ public class PokemonResultDetailsTemplate implements TemplateLoader {
 
     @Override
     public void load() {
-        Fixture.of(PokemonResultDetails.class).addTemplate(VALID, new Rule(){{
+        Fixture.of(PokemonResultDetails.class).addTemplate(VALID, new Rule() {{
             add("id", 1L);
             add("name", "charmander");
             add("sprites", one(PokemonSprites.class, VALID));

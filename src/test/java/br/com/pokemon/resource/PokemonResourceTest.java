@@ -3,7 +3,7 @@ package br.com.pokemon.resource;
 import br.com.pokemon.command.PokemonCommand;
 import br.com.pokemon.domain.PokemonDetail;
 import br.com.pokemon.templates.TemplatesPath;
-import br.com.pokemon.templates.pokemondetail.PokemonDetailTemplate;
+import br.com.pokemon.templates.pokemonDetail.PokemonDetailTemplate;
 import br.com.six2six.fixturefactory.loader.FixtureFactoryLoader;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,7 +20,6 @@ import static org.assertj.core.api.Assertions.tuple;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @ExtendWith(MockitoExtension.class)
 class PokemonResourceTest {
     @Mock
@@ -40,7 +39,7 @@ class PokemonResourceTest {
     class GivenPokemonResource {
         @Nested
         @DisplayName("When pokemonList is called")
-        class PokemonResourceTests {
+        class PokemonList {
             @BeforeEach
             void mock() {
                 reset(pokemonCommandMock);
@@ -50,7 +49,7 @@ class PokemonResourceTest {
             @DisplayName("And succeeds")
             class AndSucceeds {
                 @BeforeEach
-                void initData() {
+                void mockAndAct() {
                     pokemonDetails = PokemonDetailTemplate.gimmeAValidList();
                     when(pokemonCommandMock.execute(anyInt())).thenReturn(pokemonDetails);
                     pokemonDetailsResult = (List<PokemonDetail>) pokemonResource.pokemonList(anyInt()).getEntity();
@@ -58,7 +57,7 @@ class PokemonResourceTest {
 
                 @DisplayName("Then return a pokemon list")
                 @Test
-                void pokemonList() {
+                void thenReturnAPokemonList() {
                     assertThat(pokemonDetailsResult)
                             .hasSize(2)
                             .extracting("name", "abilities")
@@ -68,9 +67,17 @@ class PokemonResourceTest {
                             );
                 }
 
+                @DisplayName("Then return status 200")
+                @Test
+                void thenReturnStatus200() {
+                    assertThat(result)
+                            .extracting("status")
+                            .isEqualTo(500);
+                }
+
                 @DisplayName("Then call pokemonCommand.execute")
                 @Test
-                void verifyCommandExecute() {
+                void thenCallPokemonCommandExecute() {
                     verify(pokemonCommandMock, atMostOnce()).execute(anyInt());
                 }
             }
@@ -79,14 +86,14 @@ class PokemonResourceTest {
             @DisplayName("And fails")
             class AndFails {
                 @BeforeEach
-                void initData() {
+                void mockAndAct() {
                     when(pokemonCommandMock.execute(anyInt())).thenThrow(new RuntimeException("An error occurred"));
                     result = pokemonResource.pokemonList(anyInt());
                 }
 
-                @DisplayName("Then return a error Response")
+                @DisplayName("Then return status 500")
                 @Test
-                void pokemonList() {
+                void thenReturnStatus500() {
                     assertThat(result)
                             .extracting("status")
                             .isEqualTo(500);

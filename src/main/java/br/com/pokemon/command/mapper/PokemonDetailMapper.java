@@ -22,6 +22,6 @@ public class PokemonDetailMapper {
         pokemonDetailResponse.getTypes().forEach(types -> typesStr.add(types.getType().getName()));
 
         return new PokemonDetail(pokemonDetailResponse.getId(), pokemonDetailResponse.getName(),
-                pokemonDetailResponse.getSprites().getFront_default(), abilitiesStr, typesStr);
+                pokemonDetailResponse.getSprites().getFrontDefault(), abilitiesStr, typesStr);
     }
 }

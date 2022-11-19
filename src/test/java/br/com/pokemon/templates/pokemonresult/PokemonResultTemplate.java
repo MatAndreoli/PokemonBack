@@ -1,4 +1,4 @@
-package br.com.pokemon.templates.pokemonresult;
+package br.com.pokemon.templates.pokemonResult;
 
 import br.com.pokemon.infrastructure.domain.PokemonResult;
 import br.com.six2six.fixturefactory.Fixture;

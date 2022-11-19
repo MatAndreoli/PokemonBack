@@ -1,4 +1,4 @@
-package br.com.pokemon.templates.pokemondetail;
+package br.com.pokemon.templates.pokemonDetail;
 
 import br.com.pokemon.domain.PokemonDetail;
 import br.com.six2six.fixturefactory.Fixture;
@@ -17,7 +17,7 @@ public class PokemonDetailTemplate implements TemplateLoader {
         Fixture.of(PokemonDetail.class).addTemplate(VALID, new Rule() {{
             add("id", 1L);
             add("name", "charmander");
-            add("front_default", "localhost:image/url");
+            add("frontDefault", "localhost:image/url");
             add("abilities", getListTo("abilities"));
             add("types", getListTo("types"));
         }});
@@ -29,12 +29,10 @@ public class PokemonDetailTemplate implements TemplateLoader {
         if (Objects.equals(kind, "abilities")) {
             list.add("fire ball");
             list.add("fire ball");
-        }
-        else if (Objects.equals(kind, "types")) {
+        } else if (Objects.equals(kind, "types")) {
             list.add("fire");
             list.add("fire");
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("The value is invalid, should be 'abilities' or 'types'");
         }
         return list;
