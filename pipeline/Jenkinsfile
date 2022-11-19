@@ -39,8 +39,8 @@ void buildImageTags() {
     python3 get_last_docker_img.py
     export $(grep -v '^#' .env | xargs)
     
-    LOCAL_IMG=pokemon-api
-    TAG_IMG=matandreoli/pokemon-api:$NEXT_VERSION
-    IMG=matandreoli/pokemon-api:latest
+    export LOCAL_IMG=pokemon-api
+    export TAG_IMG=matandreoli/pokemon-api:$NEXT_VERSION
+    export IMG=matandreoli/pokemon-api:latest
     '''
 }
