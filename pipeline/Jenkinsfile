@@ -13,6 +13,7 @@ pipeline {
             steps {
                 buildImageTags()
                 sh'''
+                env
                 echo $TAG_IMG
                 docker build -f $DOCKERFILE_PATH/Dockerfile.jvm -t $LOCAL_IMG .
 
