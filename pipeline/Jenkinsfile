@@ -9,6 +9,30 @@ pipeline {
         DOCKERFILE_PATH = "src/main/docker"
     }
     stages {
+        stage('Build') {
+            steps {
+                echo "Building..."
+                sh '''
+                mvn clean install -DskipTests
+                '''
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Testing..."
+                sh '''
+                mvn test
+                '''
+            }
+        }
+        stage('Mutation') {
+            steps {
+                echo "Mutating..."
+                sh '''
+                mvn org.pitest:pitest-maven:mutationCoverage
+                '''
+            }
+        }
         stage('Build Docker Image') {
             steps {
                 sh'''
