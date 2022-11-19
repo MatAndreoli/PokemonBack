@@ -52,7 +52,8 @@ class PokemonResourceTest {
                 void mockAndAct() {
                     pokemonDetails = PokemonDetailTemplate.gimmeAValidList();
                     when(pokemonCommandMock.execute(anyInt())).thenReturn(pokemonDetails);
-                    pokemonDetailsResult = (List<PokemonDetail>) pokemonResource.pokemonList(anyInt()).getEntity();
+                    result = pokemonResource.pokemonList(anyInt());
+                    pokemonDetailsResult = (List<PokemonDetail>) result.getEntity();
                 }
 
                 @DisplayName("Then return a pokemon list")
@@ -72,7 +73,7 @@ class PokemonResourceTest {
                 void thenReturnStatus200() {
                     assertThat(result)
                             .extracting("status")
-                            .isEqualTo(500);
+                            .isEqualTo(200);
                 }
 
                 @DisplayName("Then call pokemonCommand.execute")
