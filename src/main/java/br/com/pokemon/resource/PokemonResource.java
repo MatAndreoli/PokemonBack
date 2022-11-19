@@ -38,4 +38,16 @@ public class PokemonResource {
             return Response.serverError().build();
         }
     }
+
+    @GET
+    @Path("/test")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response test() {
+        try {
+            LOGGER.info(String.format("[PokemonResource:test] Test endpoint"));
+            return Response.ok("Testing").build();
+        } catch (final Exception e) {
+            return Response.serverError().build();
+        }
+    }
 }
