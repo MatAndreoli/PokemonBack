@@ -9,7 +9,7 @@ pipeline {
         DOCKERFILE_PATH = "src/main/docker"
     }
     stages {
-        stage('Deliver') {
+        stage('Build Docker Image') {
             steps {
                 sh'''
                 python3 get_last_docker_img.py
@@ -24,13 +24,18 @@ pipeline {
                 docker tag $LOCAL_IMG $TAG_IMG
                 docker tag $LOCAL_IMG $IMG
 
-                docker push $TAG_IMG
-                docker push $IMG
-
                 docker images
-
-                docker rmi pokemon-api
                 '''
+            }
+        }
+        stage('Push Image to Docker') {
+            steps{
+                scrpit{
+                    withCredentials([string(credentialsId: 'docker_hub_secret', variable: 'DOCKER_HUB_CRED')]) {
+                        sh 'docker login -u matandreoli -p ${DOCKER_HUB_CRED}'
+                        sh 'echo $TAG_IMG'
+                    }
+                }
             }
         }
     }
