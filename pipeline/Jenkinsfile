@@ -11,14 +11,8 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
+                buildImageTags()
                 sh'''
-                python3 get_last_docker_img.py
-                export $(grep -v '^#' .env | xargs)
-                
-                LOCAL_IMG=pokemon-api
-                export TAG_IMG=matandreoli/pokemon-api:$NEXT_VERSION
-                IMG=matandreoli/pokemon-api:latest
-
                 docker build -f $DOCKERFILE_PATH/Dockerfile.jvm -t $LOCAL_IMG .
 
                 docker tag $LOCAL_IMG $TAG_IMG
@@ -37,4 +31,16 @@ pipeline {
             }
         }
     }
+}
+
+
+void buildImageTags() {
+    sh'''
+        python3 get_last_docker_img.py
+        export $(grep -v '^#' .env | xargs)
+        
+        LOCAL_IMG=pokemon-api
+        TAG_IMG=matandreoli/pokemon-api:$NEXT_VERSION
+        IMG=matandreoli/pokemon-api:latest
+    '''
 }
