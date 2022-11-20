@@ -11,9 +11,9 @@ for version in (current_version.split(".")):
 patch = str(int(versions[2]) + 1)
 versions[2] = patch
 
-joinned_version = ".".join(versions)
+joined_version = ".".join(versions)
 
-file.getElementsByTagName("version")[0].firstChild.nodeValue = joinned_version
+file.getElementsByTagName("version")[0].firstChild.nodeValue = joined_version
 
 with open("pom.xml", "w") as fs:
     fs.write(file.toxml())
