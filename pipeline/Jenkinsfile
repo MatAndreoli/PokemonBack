@@ -4,9 +4,7 @@ pipeline {
         maven 'Maven363' 
     }
     environment {
-        DATE = new Date().format('yy.M')
-        TAG = "${DATE}.${BUILD_NUMBER}"
-        DOCKERFILE_PATH = "src/main/docker"
+        DOCKERFILE_PATH = "src/main/docker/Dockerfile.jvm"
     }
     stages {
         stage('Build') {
@@ -40,10 +38,10 @@ pipeline {
                 export $(grep -v '^#' .env | xargs)
                 
                 LOCAL_IMG=pokemon-api
-                TAG_IMG=matandreoli/pokemon-api:$NEXT_VERSION
-                IMG=matandreoli/pokemon-api:latest
+                TAG_IMG=matandreoli/$LOCAL_IMG:$NEXT_VERSION
+                IMG=matandreoli/$LOCAL_IMG:latest
                 
-                docker build -f $DOCKERFILE_PATH/Dockerfile.jvm -t $LOCAL_IMG .
+                docker build -f $DOCKERFILE_PATH -t $LOCAL_IMG .
 
                 docker tag $LOCAL_IMG $TAG_IMG
                 docker tag $LOCAL_IMG $IMG
@@ -56,6 +54,7 @@ pipeline {
             steps{
                 withCredentials([string(credentialsId: 'docker_hub_secret', variable: 'DOCKER_HUB_CRED')]) {
                     sh'''
+                    echo $TAG_IMG
                     docker login -u matandreoli -p ${DOCKER_HUB_CRED}
 
                     export $(grep -v '^#' .env | xargs)
