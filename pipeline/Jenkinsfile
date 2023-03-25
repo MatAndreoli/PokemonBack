@@ -54,7 +54,6 @@ pipeline {
             steps{
                 withCredentials([string(credentialsId: 'docker_hub_secret', variable: 'DOCKER_HUB_CRED')]) {
                     sh'''
-                    echo $TAG_IMG
                     docker login -u matandreoli -p ${DOCKER_HUB_CRED}
 
                     export $(grep -v '^#' .env | xargs)
